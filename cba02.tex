@@ -51,7 +51,12 @@ Florianópolis, SC - Brasil}
 
 \selectlanguage{brazil}
 \begin{abstract}
- Este trabalho apresenta um.
+ Este trabalho apresenta uma estratégia de seleção de parâmetros do sinal de fala utilizados para classificação em classes fonéticas. Os parâmetros analisados são investigados através de um método baseado no algoritmo de \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético.
+
+
+%o tipo de inferência consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas distintas.
+
+%Um subconjunto desses parämetros é escolhido automaticamente através de um método baseado no algoritmo \textit{AdaBoost}. Os resultados das simulações permitem inferir acerca de quais os melhores parâmetros para a composição de um classificador.
 \end{abstract}
 
 \keywords{Reconhecimento de padrões, classificação fonética, árvore de decição.}
@@ -59,16 +64,17 @@ Florianópolis, SC - Brasil}
 \selectlanguage{brazil}
 
 \section{Introdução}
-A atividade de classificação de padrões é um processo inerente do ser humano. Para distinguir um objeto de outro, normalmente, o ser humano armazena parâmetros (atributos) marcantes (característicos) de um determinado conjunto. Por exemplo, uma laranja é composta de gomos. Se alguém precisa verificar se é uma laranja, imediatamente verifica se a fruta tem gomos. Esse é um parâmetro marcante da laranja. É óbvio que somente este parâmetro não é suficiente para afirmar que a fruta é uma laranja, mas é um parâmetro relevante. Dessa forma, o sinal de fala é análisado conforme os correspondentes sons constituintes do sinal. 
+A atividade de classificação de padrões é um processo inerente do ser humano. Para distinguir um objeto de outro, normalmente, o ser humano armazena parâmetros marcantes, aqui chamados de atributos característicos, de um determinado conjunto. Por exemplo, uma laranja é composta de gomos. Se alguém precisa verificar se é uma laranja, imediatamente verifica se a fruta tem gomos. Esse é um atributo característico da laranja. É óbvio que somente este atributo não é suficiente para afirmar que a fruta é uma laranja, mas é um atributo relevante \cite{marinho2004}.
+
+Dessa forma, o sinal de fala é análisado conforme os correspondentes sons constituintes do sinal.
+
+Métodos de seleção tentam identificar e reter apenas os parâmetros que mais contribuem para a execução de uma dada tarefa.
 
 A classificação fonética é utilizada em uma ampla gama de aplicações nos mais variados tipos de sistemas de processamento de fala. O objetivo da classificação fonética é determinar o fonema emitido por um interlocutor a partir de uma amostra do sinal de fala. A classificação é realizada através do realce de características marcantes das amostras do sinal de fala (dos fonemas). Dessa forma, um conjunto de parâmetros é extraído para cada amostra de fala. Após esse processamento, os parâmetros são inseridos em um algoritmo classificador que procurará decidir qual o fonema emitido. Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido. A técnica de Seleção de Parâmetros tem como função mostrar quais os parâmetros mais relevantes (ou mais utilizados) em uma tarefa de classificação, possibilitando, assim, descobrir quais os parâmetros redundantes, que trazem pouca (ou nenhuma) contribuição à tarefa de classificação. A proposta deste trabalho é aplicar o classificador SVM à classificação fonética, utilizando a base de dados TIMIT, e descobrir os parâmetros mais relevantes na classificação, aplicando a técnica Boosting de Seleção de Parâmetros.
 
 Em uma tarefa de Classificação Fonética, o objetivo central é observar uma amostra de voz e afirmar qual fonema foi emitido pelo interlocutor. Como toda tarefa de classificação, o sistema que pode auxiliar nesta tarefa é constituído de três blocos principais: Pré-processamento, Extração de Parâmetros e Classificação (Duda; Hart, 2000). Costuma-se chamar os dois primeiros blocos de Front-end, que tem como função reduzir o conjunto de dados a um conjunto específico de parâmetros (features) que minimizem o erro no processo de classificação. O bloco seguinte - conhecido como Classificador - tem a função de, a partir dos parâmetros apresentados, tomar uma decisão de qual fonema foi apresentado. Obviamente, este exemplo simplório omite o fato de que o classificador foi treinado anteriormente, através de conjuntos de amostras de treino, que serão úteis para que o classificador ``aprenda`` os parâmetros característicos para cada fonema. Independente se o sistema está em fase de treinamento ou de testes, o front-end está sempre presente, para obter os parâmetros que servirão de entrada para o classificador.
 
 Conforme mencionado no Capítulo 1, a tarefa de classificação é parte do processo de reconhecimento de padrões. Independente da máquina que está sendo implementada (reconhecimento de voz, impressões digitais ou mesmo classificação de frutas em um processo industrial de fabricação de sucos), a tarefa de classificação é considerada um ponto chave do reconhecimento de padrões. A tarefa de classificar um objeto em um pré- especificado conjunto de categorias ou classes é uma característica da inteligência humana, que é objeto de estudos da inteligência artificial. É notório que o poder de classificar ajuda a mente humana no processo de aprendizado. Classificando, os homens podem se especializar em uma classe, ou estudar uma classe de cada vez. Ou até mesmo, podem tomar decisões. Sabendo a classe de um determinado objeto, pode-se escolher que o que fazer com aquele objeto.
-
-
-
 
 Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No caso das frutas, é apresentada uma fruta e é informada a sua classificação (se é laranja, uva, etc.), durante a fase de treinamento. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. De acordo com o exemplo anterior, não se informa que tipo de fruta existe na fase de treinamento. Assim, ele forma agrupamentos naturais, chamados clusters, dos padrões de entrada (Duda; Hart, 2000). Estes clusters podem ser considerados como classes que o próprio classificador identificou. É óbvio que neste caso, se houver imprecisões nos dados de entrada, o desempenho da classificação será prejudicado.
 
