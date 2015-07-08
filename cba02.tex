@@ -51,7 +51,7 @@ This work presents a selection strategy of speech signal parameters used for cla
 
 \selectlanguage{brazil}
 \begin{abstract}
- Este trabalho apresenta uma estratégia de seleção de parâmetros do sinal de fala utilizados para classificação em classes fonéticas. Os parâmetros analisados são investigados através de um método baseado no algoritmo de \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético.
+ Este trabalho apresenta uma estratégia de seleção de parâmetros do sinal de fala utilizados para classificação em classes fonéticas. Os parâmetros analisados são investigados através de um método baseado no algoritmo de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético.
 
 %o tipo de inferência consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas distintas.
 %Um subconjunto desses parämetros é escolhido automaticamente através de um método baseado no algoritmo \textit{AdaBoost}. Os resultados das simulações permitem inferir acerca de quais os melhores parâmetros para a composição de um classificador.
@@ -61,6 +61,9 @@ This work presents a selection strategy of speech signal parameters used for cla
 \selectlanguage{brazil}
 
 \section{Introdução}
+A convergência da computação e comunicação produziu uma sociedade que se abastece de informações. No entanto, a maioria das informações está em sua forma bruta, ou seja, de dados. Se estes se caracterizam como fatos registrados, então, pode-se considerar que a informação é o conjunto de padrões, ou expectativas, que fundamentam os dados. Todavia, há uma enorme quantidade de informações que são potencialmente importantes, mas não possuem banco de dados.
+%Informações truncadas ainda tem sido descobertas ou articuladas. Nossa missão é enfatizar tais informações. 
+%A mineração de dados consiste na extração de informações implícitas, previamente desconhecida e potencialmente útil, a partir de dados. A idéia é construir programas de computador que filtrem bancos de dados automaticamente em busca de regularidades ou padrões.
 A atividade de classificação de padrões é um processo inerente do ser humano. Para distinguir um objeto de outro, normalmente, o ser humano armazena parâmetros marcantes, aqui chamados de atributos característicos, de um determinado conjunto. Por exemplo, uma laranja é composta de gomos. Se alguém precisa verificar se é uma laranja, imediatamente verifica se a fruta tem gomos. Esse é um atributo característico da laranja. É óbvio que somente este atributo não é suficiente para afirmar que a fruta é uma laranja, mas é um atributo relevante \cite{marinho2004}.
 
 Dessa forma, o sinal de fala é análisado conforme os correspondentes sons constituintes do sinal.
