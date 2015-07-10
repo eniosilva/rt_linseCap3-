@@ -63,7 +63,7 @@ This work presents a selection strategy of speech signal parameters used for cla
 \section{Introdução}
 A convergência da computação e comunicação produziu uma sociedade que consome informações. No entanto, a maioria das informações está em sua forma bruta, ou seja, de dados. Se estes se caracterizam como fatos registrados, então, pode-se considerar que a informação é o conjunto de padrões, ou expectativas, que fundamentam os dados. A tecnologia atual nos permite capturar e armazenar uma vasta quantidade de dados. Todavia, há uma enorme quantidade de informações que são potencialmente importantes, mas não possuem bancos de dados adequados \cite{bookweka}.
 
-Encontrar parâmetros, tendências e anomalias nesses bancos é um dos grandes desafios da tecnologia da informação, ou seja, transformar dados em informação e transformar informação em conhecimento. Nesse sentido, há um grande progresso nas técnicas de análise de dados, como mineração de dados e aprendizado de máquinas, tornando-as em uma ciência sólida e com base matemática consistente \cite{Webb2002}, \cite{Maimon2010}, \cite{Ilias2007}. Dentre essas técnicas, a mineração de dados objetiva a extração de informações implícitas, previamente desconhecidas e potencialmente úteis, a partir de dados. Isto é obtido através do desenvolvimento de algoritmos computacionais capazes de filtrar bancos de dados automaticamente em busca de regularidades ou padrões, extraindo informações para serem expressas em uma forma compreensível e que possam ser úteis para diversos propósitos, tal como a classificação de padrões \cite{duda2001}.
+Encontrar parâmetros, tendências e anomalias nesses bancos é um dos grandes desafios da tecnologia da informação, ou seja, transformar dados em informação e transformar informação em conhecimento. Nesse sentido, há um grande progresso nas técnicas de análise de dados, como mineração de dados e aprendizado de máquinas, tornando-as em uma ciência sólida e com base matemática consistente \cite{Webb2002}, \cite{Maimon2010}, \cite{Ilias2007}. Dentre essas técnicas, a mineração de dados objetiva a extração de informações implícitas, previamente desconhecidas e potencialmente úteis. Isto é obtido através do desenvolvimento de algoritmos computacionais capazes de filtrar bancos de dados automaticamente em busca de regularidades ou padrões, extraindo informações para serem expressas em uma forma compreensível e que possam ser úteis para diversos propósitos, tal como a classificação de padrões \cite{duda2001}.
 
 %A idéia é construir algoritmos computacionais capazes de filtrar bancos de dados automaticamente em busca de regularidades ou padrões, extraindo informações para serem expressas em uma forma compreensível e que possam ser úteis para diversos propósitos, tal como a classificação de padrões.
 
@@ -92,7 +92,9 @@ Em \cite{Klautau2003} a seleção de atributos foi aplicada à sistemas de reconhec
 
 Nos referidos trabalhos, os sinais considerados como referência são sinais de fala de banda larga, estes possuem geralmente frequência de amostragem superior à 16000 Hz e contêm componentes de frequências superiores à 3400 Hz. Em contraste, os algoritmos discutidos em \cite{Morales2009}, \cite{He2011} e \cite{Lee2012} utilizam como referência, sinais de fala de banda limitada aplicados à rede de telefonia pública (\textit{public switched telephone network} - PSTN). 
 
-Entretanto, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada, desse modo as estratégias propostas tem seus desempenhos severamente degradados sempre que a classe fonética não é precisamente obtida. Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Chigier91} e \cite{EnioSBrT2013} são apresentadas análises de atributos do sinal de fala em diferentes larguras de banda. Em \cite{Alex2010} e \cite{EnioSBrT2013} são propostas a classificação de um grupo específico de classes fonéticas nomeadas classes fricativas, as quais são caracterizadas por conterem energia espectral concentrada em altas frequências, também em \cite{EnioSBrT2013} constata-se um desempenho satisfatório do algoritmo para esse tipo de classe fonética.
+Entretanto, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada. Desse modo as estratégias propostas tem seus desempenhos severamente degradados sempre que a classe fonética não é precisamente obtida. 
+
+Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Chigier91} e \cite{EnioSBrT2013} são apresentadas análises de atributos do sinal de fala em diferentes larguras de banda. Em \cite{Alex2010} e \cite{EnioSBrT2013} são propostas a classificação de um grupo específico de classes fonéticas nomeadas classes fricativas, as quais são caracterizadas por conterem energia espectral concentrada em altas frequências, também em \cite{EnioSBrT2013} constata-se um desempenho satisfatório do algoritmo para esse tipo de classe fonética.
 
 %Entretanto, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada, desse modo as estratégias propostas tem seus desempenhos severamente degradados sempre que a classe fonética não é precisamente obtida. Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Chigier91} e \cite{EnioSBrT2013} são apresentadas análises de atributos do sinal de fala em diferentes larguras de banda e, como em \cite{Alex2010}, onde é proposta a classificação de um grupo específico de classes fonéticas nomeadas classes fricativas, as quais são caracterizadas por conterem energia espectral concentrada em altas frequências, também em \cite{EnioSBrT2013} constata-se um desempenho satisfatório do algoritmo para esse tipo de classe fonética.
 
@@ -110,33 +112,45 @@ Entretanto, apesar da crescente evolução dos algoritmos de classificação fonétic
 
 %A degradação da qualidade do sinal de fala usado na PSTN é causada pela introdução de um filtro passa banda que atenua o nível de energia do sinal. Esses filtros apresentam largura de banda cuja escala contempla aproximadamente os compenentes de frequência de 300 a 3400 Hz e são aplicados para reduzir o feito de \textit{crosstalk} entre canais diferentes \cite{BookBernd}.
 
-Desde modo, objetivando a seleção de atributos para o desenvolvimento de um classificador que clusterize sianis de banda limitada em classes fricativas, neste trabalho a estratégia proposta tem como base os algoritmos de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético e a eficácia da estratégia proposta é comprovada através dos os resultados obtidos que atestam que o algoritmo proposto exibe melhores atributos característicos.
-
-%confirmam a eficácia da estratégia proposta.
-
+Assim, objetivando a seleção de atributos para o desenvolvimento de um classificador que clusterize sianis de banda limitada em classes fricativas, neste trabalho a estratégia proposta tem como base os algoritmos de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância \cite{Webb2002}. Dessa forma, a estratégia proposta consiste em identificar os atributos que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição de um classificador fonético e comprovam a eficácia da estratégia proposta.
 
 %Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético e confirmam a eficácia da estratégia proposta.
-
 %A eficácia do algoritmo é comprovada através de simulações e os resultados obtidos atestam que o algoritmo proposto exibe melhores atributos característicos.
 
 Este artigo está organizado como segue. Na Seção \ref{extracaoEclassificacao}, é apresentada uma visão geral dos procedimentos de extração de atributos do sinal de fala e sua classificação em classes fonéticas. As Seções \ref{selAtrib} e \ref{algCluster} descrevem a etapa de seleção de atributos e a etapa de construção do algoritmo utilizado para clusterização, bem como os detalhes da contribuição deste artigo. Finalmente, as Seções \ref{resultados} e \ref{conclusao} apresentam, respectivamente, os resultados obtidos, e as conclusões e comentários finais deste trabalho de pesquisa.
 
-
 \section{Extração de Atributos do Sinal de Fala e Classificação Fonética}\label{extracaoEclassificacao}
-A tarefa de classificação é parte do processo de reconhecimento de padrões. Independente da máquina que está sendo implementada (reconhecimento de fala, impressões digitais ou mesmo classificação de frutas em um processo industrial de fabricação de sucos), a tarefa de classificação é considerada um ponto chave do reconhecimento de padrões. A tarefa de classificar um objeto em um pré-especificado conjunto de categorias ou classes é uma característica da inteligência humana, que é objeto de estudos da inteligência artificial. É notório que o poder de classificar ajuda a mente humana no processo de aprendizado.
+A tarefa de classificação é parte do processo de reconhecimento de padrões. Independente do sistema que está sendo implementado (reconhecimento de fala, impressões digitais ou mesmo classificação de frutas em um processo industrial de fabricação de sucos), a tarefa de classificação é considerada um ponto chave do reconhecimento de padrões \cite{Maimon2010}.% A tarefa de classificar um objeto em um pré-especificado conjunto de categorias ou classes é uma característica da inteligência humana, que é objeto de estudos da inteligência artificial.
 
 % Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido. A técnica de Seleção de Parâmetros tem como função mostrar quais os parâmetros mais relevantes (ou mais utilizados) em uma tarefa de classificação, possibilitando, assim, descobrir quais os parâmetros redundantes, que trazem pouca (ou nenhuma) contribuição à tarefa de classificação. A proposta deste trabalho é aplicar o classificador SVM à classificação fonética, utilizando a base de dados TIMIT, e descobrir os parâmetros mais relevantes na classificação, aplicando a técnica Boosting de Seleção de Parâmetros.
 
-Em uma tarefa de Classificação Fonética, o objetivo central é observar uma amostra do sinal de fala e decidir qual classe fonética foi emitida pelo interlocutor. Como toda tarefa de classificação, o sistema que pode auxiliar nesta tarefa é constituído de três blocos principais: Pré-processamento, Extração de Parâmetros e Classificação \cite{duda2001}. Costuma-se chamar os dois primeiros blocos de \textit{Front-end}, que tem como função reduzir o conjunto de dados a um conjunto específico de atributos que minimizem o erro no processo de classificação. O bloco seguinte - conhecido como Classificador - tem a função de, a partir dos atributos apresentados, tomar uma decisão sobre qual classe fonética foi apresentada. Obviamente, este exemplo simplório omite o fato de que o classificador foi treinado anteriormente, através de conjuntos de amostras de treino, que serão úteis para que o classificador ``aprenda`` os atributos característicos para cada classe fonética. Independente se o sistema está em fase de treinamento ou de testes, o front-end está sempre presente, para obter os atributos que servirão de entrada para o classificador.
+Em uma tarefa de classificação fonética, o objetivo central é observar uma amostra do sinal de fala e decidir qual classe fonética foi emitida pelo interlocutor. Como toda tarefa de classificação, o sistema que pode auxiliar nesta tarefa é constituído de três blocos principais: pré-processamento, extração de atributos e classificação \cite{duda2001}. Costuma-se chamar os dois primeiros blocos de \textit{front-end}, que tem como função reduzir o conjunto de dados a um conjunto específico de atributos que minimizem o erro no processo de classificação. O bloco seguinte - conhecido como classificador - tem a função de, a partir dos atributos apresentados, tomar uma decisão sobre qual classe fonética foi apresentada. 
 
-Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No caso das frutas, é apresentada uma fruta e é informada a sua classificação (se é laranja, uva, etc.), durante a fase de treinamento. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. De acordo com o exemplo anterior, não se informa que tipo de fruta existe na fase de treinamento. Assim, ele forma agrupamentos naturais, chamados \textit{clusters}, dos padrões de entrada \cite{duda2001}. Estes \textit{clusters} podem ser considerados como classes que o próprio classificador identificou. É óbvio que neste caso, se houver imprecisões nos dados de entrada, o desempenho da classificação será prejudicado.
+Na fase de treinamento, o processo de ``aprendizagem`` do classificador é realizado através de conjuntos de amostras de treino, que apresentam atributos característicos para cada classe fonética. Independente se o sistema está em fase de treinamento ou de testes, o \textit{front-end} está sempre presente, para obter os atributos que servirão de entrada para o classificador.
 
-Para se implementar uma tarefa de classificação, torna-se necessária uma base de dados de exemplos, para possibilitar o treinamento do classificador e cada exemplo é caracterizado por uma série de parâmetros que descrevem suas características. Neste trabalho de pesquisa, investigamos o conjunto de classes fonéticas fricativas.
+Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No caso das frutas, é apresentada uma fruta e é informada a sua classificação (se é laranja, uva, etc.), durante a fase de treinamento. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. De acordo com o exemplo anterior, não se informa que tipo de fruta existe na fase de treinamento. Assim, ele forma agrupamentos naturais, chamados \textit{clusters}, dos padrões de entrada \cite{duda2001}. Estes \textit{clusters} podem ser considerados como classes que o próprio classificador identificou. %É óbvio que neste caso, se houver imprecisões nos dados de entrada, o desempenho da classificação será prejudicado.
 
-O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada pela PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta da Tabela~\ref{TebelaClasses}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
+Para se implementar uma tarefa de classificação e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E assim como em \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa investigamos o conjunto de classes fonéticas fricativas.
+
+O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta das classes ilustradas na Figura TAL, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
+
+A Figura TAL apresenta diferentes níveis de clusterização denominadas A, B, C e D, contendo duas, três, cinco e nove classes. Após o processo de clusterização as classificação fonéticas tornam-se mais discriminativa e, consequentemente, mais apropriada para a etapa de treinamento.
+
+%O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada pela PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta da Tabela~\ref{TebelaClasses}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
 
 \section{Seleção de Atributos}\label{selAtrib}
 A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes (ou mais utilizados) em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca (ou nenhuma) contribuição à tarefa de classificação. Nesse contexto, a proposta deste trabalho é aplicar o classificador de árvore de decisão à classificação fonética e investigar os atributos mais característicos na classificação, aplicando a técnica de análise de componenetes principais (\textit{principal component analysis} - PCA) para seleção de atributos \cite{Webb2002}.
+
+Assim como em TAL, os atributos investigados são:
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
+\subsection{tal}
 
 \section{Algoritmo de Clusterização}\label{algCluster}
 \subsection{Treinamento de Classificadores}
@@ -145,28 +159,27 @@ A técnica de seleção de atributos tem como objetivo mostrar quais os atributos m
 
 
 
-\begin{table}[htb]
-  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
-  \begin{center}
-% {\tt
-  \begin{tabular}{|c|c|c|c|c|c|}\hline
-  \multicolumn{4}{|c|}{Classes} & \multirow{2}{*}{ex.} & \multirow{2}{*}{Descrição}\\\cline{1-4}
-  2&3&5&9&&\\\hline\hline
-  %&&C1&$/z/$ & Fricativas vozeadas alveolares\\\hline
-  \multirow{8}{*}{A1}&\multirow{4}{*}{B1}&\multirow{3}{*}{C1}&D1&$/z/$ & Fricativas vozeadas alveolares\\\cline{4-6}
-     & & &D2&$/v/$ & Fricativas vozeadas labiodentais\\\cline{4-6}
-     & & &D3&$/j/$ & Fricativas vozeadas palatais\\\cline{3-6}
-     & &C2 &D4&$/V/$ & Demais fonemas vozeados\\\cline{2-6}
-     &\multirow{4}{*}{B2}&\multirow{3}{*}{B3}&D5&$/f/$ & Fricativas não-vozeadas labiodentais\\\cline{4-6}
-     & & &D6&$/s/$ & Fricativas não-vozeadas alveolares\\\cline{4-6}
-     & & &D7&$/x/$ & Fricativas não-vozeadas palatais\\\cline{3-6}
-     & &C4 &D8&$/U/$ & Demais fonemas não-vozeados\\\hline
-  A2 &B3 &C5 &D9&$/Sil/$ & Silêncio\\\hline
-  \end{tabular}
-% }
-  \end{center}
-\end{table}
-A Tabela \ref{TebelaClasses} apresenta quatro diferentes tipos de clusterização denominadas A, B, C e D, contendo duas, três, cinco e nove classes. Após o processo de clusterização e classificação fonética, a seleção de \textit{codebooks} NB e WB torna-se mais discriminativa e, consequentemente, mais apropriada para a etapa de treinamento.
+%\begin{table}[htb]
+%  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
+%  \begin{center}
+%% {\tt
+%  \begin{tabular}{|c|c|c|c|c|c|}\hline
+%  \multicolumn{4}{|c|}{Classes} & \multirow{2}{*}{ex.} & \multirow{2}{*}{Descrição}\\\cline{1-4}
+%  2&3&5&9&&\\\hline\hline
+%  %&&C1&$/z/$ & Fricativas vozeadas alveolares\\\hline
+%  \multirow{8}{*}{A1}&\multirow{4}{*}{B1}&\multirow{3}{*}{C1}&D1&$/z/$ & Fricativas vozeadas alveolares\\\cline{4-6}
+%     & & &D2&$/v/$ & Fricativas vozeadas labiodentais\\\cline{4-6}
+%     & & &D3&$/j/$ & Fricativas vozeadas palatais\\\cline{3-6}
+%     & &C2 &D4&$/V/$ & Demais fonemas vozeados\\\cline{2-6}
+%     &\multirow{4}{*}{B2}&\multirow{3}{*}{B3}&D5&$/f/$ & Fricativas não-vozeadas labiodentais\\\cline{4-6}
+%     & & &D6&$/s/$ & Fricativas não-vozeadas alveolares\\\cline{4-6}
+%     & & &D7&$/x/$ & Fricativas não-vozeadas palatais\\\cline{3-6}
+%     & &C4 &D8&$/U/$ & Demais fonemas não-vozeados\\\hline
+%  A2 &B3 &C5 &D9&$/Sil/$ & Silêncio\\\hline
+%  \end{tabular}
+%% }
+%  \end{center}
+%\end{table}
 
 
 \section{Análise da Classificação}
