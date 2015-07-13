@@ -112,7 +112,7 @@ Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Ch
 
 %A degradação da qualidade do sinal de fala usado na PSTN é causada pela introdução de um filtro passa banda que atenua o nível de energia do sinal. Esses filtros apresentam largura de banda cuja escala contempla aproximadamente os compenentes de frequência de 300 a 3400 Hz e são aplicados para reduzir o feito de \textit{crosstalk} entre canais diferentes \cite{BookBernd}.
 
-Assim, objetivando a seleção de atributos para o desenvolvimento de um classificador que clusterize sianis de banda limitada em classes fricativas, neste trabalho a estratégia proposta tem como base os algoritmos de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância \cite{Webb2002}. Dessa forma, a estratégia proposta consiste em identificar os atributos que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição de um classificador fonético e comprovam a eficácia da estratégia proposta.
+Assim, objetivando a seleção de atributos para o desenvolvimento de um classificador que clusterize sinais de banda limitada em classes fricativas, neste trabalho a estratégia proposta tem como base os algoritmos de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância \cite{Webb2002}. Dessa forma, a estratégia proposta consiste em identificar os atributos que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição de um classificador fonético e comprovam a eficácia da estratégia proposta.
 
 %Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético e confirmam a eficácia da estratégia proposta.
 %A eficácia do algoritmo é comprovada através de simulações e os resultados obtidos atestam que o algoritmo proposto exibe melhores atributos característicos.
@@ -130,7 +130,7 @@ Na fase de treinamento, o processo de ``aprendizagem`` do classificador é realiz
 
 Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No caso das frutas, é apresentada uma fruta e é informada a sua classificação (se é laranja, uva, etc.), durante a fase de treinamento. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. De acordo com o exemplo anterior, não se informa que tipo de fruta existe na fase de treinamento. Assim, ele forma agrupamentos naturais, chamados \textit{clusters}, dos padrões de entrada \cite{duda2001}. Estes \textit{clusters} podem ser considerados como classes que o próprio classificador identificou. %É óbvio que neste caso, se houver imprecisões nos dados de entrada, o desempenho da classificação será prejudicado.
 
-Para se implementar uma tarefa de classificação e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E assim como em \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa investigamos o conjunto de classes fonéticas fricativas.
+Para se implementar uma tarefa de classificação e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E assim como em \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa investigamos o conjunto de classes fonéticas fricativas.
 
 O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta das classes ilustradas na Fig. \ref{tree}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
 \begin{figure}[h]
@@ -142,21 +142,21 @@ O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo
 \includegraphics[scale=0.2]{figures/tree.eps}
 \caption{\label{tree}Árvore de decisão fonética.}
 \end{figure}
-A Fig. \ref{tree} apresenta diferentes níveis de clusterização, contendo duas ou três subclasses, detalhes da classificação proposta é apresentada na Tabela TAl. Após o processo de clusterização as classificação fonéticas tornam-se mais discriminativa e, consequentemente, mais apropriada para a etapa de treinamento.
+A Fig. \ref{tree} apresenta diferentes níveis de clusterização, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de clusterização as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
 
 \begin{table}[htb]
-  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
+  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasse}
   \begin{center}
-    \begin{tabular}{|c|c|l|}\hline
-      Classes &ex. & Descrição\\\hline\hline
-      $Cl_1$ (ex. $/z/$ )&$/z/$ & Fricativas vozeadas alveolares\\\hline
-      $Cl_2$&$/v/$ & Fricativas vozeadas labiodentais\\\hline
-      $Cl_3$&$/j/$ & Fricativas vozeadas palatais\\\hline
-      $Cl_4$&$/V/$ & Demais fonemas vozeados\\\hline
-      $Cl_5$&$/f/$ & Fricativas não-vozeadas labiodentais\\\hline
-      $Cl_6$&$/s/$ & Fricativas não-vozeadas alveolares\\\hline
-      $Cl_7$&$/x/$ & Fricativas não-vozeadas palatais\\\hline
-      $Cl_8$&$/U/$ & Demais fonemas não-vozeados\\\hline
+    \begin{tabular}{|c|l|}\hline
+      Classes & Descrição\\\hline\hline
+      $Cl_1$ (ex.$/z/$)& Fricativas vozeadas alveolares\\\hline
+      $Cl_2$ (ex.$/v/$)& Fricativas vozeadas labiodentais\\\hline
+      $Cl_3$ (ex.$/j/$)& Fricativas vozeadas palatais\\\hline
+      $Cl_4$ (ex.$/a/$)& Demais fonemas vozeados\\\hline
+      $Cl_5$ (ex.$/s/$)& Fricativas não-vozeadas alveolares\\\hline
+      $Cl_6$ (ex.$/f/$)& Fricativas não-vozeadas labiodentais\\\hline
+      $Cl_7$ (ex.$/x/$)& Fricativas não-vozeadas palatais\\\hline
+      $Cl_8$ (ex.$/b/$)& Demais fonemas não-vozeados\\\hline
     \end{tabular}
   \end{center}
 \end{table}
@@ -166,16 +166,48 @@ A Fig. \ref{tree} apresenta diferentes níveis de clusterização, contendo duas ou
 \section{Seleção de Atributos}\label{selAtrib}
 A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes (ou mais utilizados) em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca (ou nenhuma) contribuição à tarefa de classificação. Nesse contexto, a proposta deste trabalho é aplicar o classificador de árvore de decisão à classificação fonética e investigar os atributos mais característicos na classificação, aplicando a técnica de análise de componenetes principais (\textit{principal component analysis} - PCA) para seleção de atributos \cite{Webb2002}.
 
-Assim como em TAL, os atributos investigados são:
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
-\subsection{tal}
+Assim como em \cite{Jax2004}, os seguintes atributos vetoriais e escalares são investigados:
+\begin{itemize}
+ \item A taxa de cruzamento por zero.
+  \begin{equation}
+   % \begin{array}{l}
+      x_{zcr} = \frac{\sum_{k=2}^{N} \frac{1}{2} |Sinal[s(k)]-Sinal[s(k-1)]|}{(N-1)},
+   % \end{array}
+  \end{equation}
+onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \leq 0$.
+
+ \item O índice de gradiente
+  \begin{equation}
+   % \begin{array}{l}
+      x_{gi} = \sum_{k=2}^{N} \frac{\Psi(k)|s(k)-s(k-1)|}{\sqrt{\frac{1}{N}E(m)}}.
+   % \end{array}
+  \end{equation}
+  A variável $\Psi(k)$ representa o sinal do gradiente $s(k)-s(k-1)$, i.e, $\Psi(k) \in \{-1,1\}$, e $\Psi(k) = 1/2 |\Psi(k)-\Psi(k-1)|$.
+ \item A energia do frame
+  \begin{equation}
+    %\begin{array}{l}
+      E(m)=\sum_{k=0}^{N-1}s^2(k),
+    %\end{array}
+  \end{equation}
+  onde $m$ representa o \textit{frame} atual e $N$ o número de amostras por \textit{frame}.
+ \item A estimativa do \textit{kurtosis} local.
+  \begin{equation}
+   % \begin{array}{l}
+      x_{k} = log \frac{1}{N} \sum_{k=0}^{N-1} s^4(k) - 2 log \frac{1}{N} E(m).
+   % \end{array}
+  \end{equation}
+ \item O centróide espectral.
+  \begin{equation}
+   % \begin{array}{l}
+      x_{sc} = \frac{\sum_{i=0}^{M/2} i . |S(e^{j\Omega_i})|}{(\frac{M}{2} + 1)\sum_{i=0}^{M/2}|S(e^{j\Omega_i})|}.
+   % \end{array}
+  \end{equation}
+ \item A estimativa de audibilidade (\textit{loundness})
+ \item A estimativa da largura de banda.
+ \item A uniformidade.
+ \item Os dez primeiros coeficientes de reflexão.
+ \item Os treze primeiros coeficientes espectrais da escala \textit{mel}.
+\end{itemize}
 
 \section{Algoritmo de Clusterização}\label{algCluster}
 \subsection{Treinamento de Classificadores}
