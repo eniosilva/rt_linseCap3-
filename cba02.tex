@@ -132,9 +132,34 @@ Existem duas formas de se treinar um classificador: o aprendizado supervisionado
 
 Para se implementar uma tarefa de classificação e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E assim como em \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa investigamos o conjunto de classes fonéticas fricativas.
 
-O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta das classes ilustradas na Figura TAL, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
+O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta das classes ilustradas na Fig. \ref{tree}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
+\begin{figure}[h]
+%\center
+\centering
+%\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
+%\includegraphics{figuras/Fig_2.eps}
+%\includegraphics[scale=0.95]{figuras/Fig_2.eps}
+\includegraphics[scale=0.2]{figures/tree.eps}
+\caption{\label{tree}Árvore de decisão fonética.}
+\end{figure}
+A Fig. \ref{tree} apresenta diferentes níveis de clusterização, contendo duas ou três subclasses, detalhes da classificação proposta é apresentada na Tabela TAl. Após o processo de clusterização as classificação fonéticas tornam-se mais discriminativa e, consequentemente, mais apropriada para a etapa de treinamento.
 
-A Figura TAL apresenta diferentes níveis de clusterização denominadas A, B, C e D, contendo duas, três, cinco e nove classes. Após o processo de clusterização as classificação fonéticas tornam-se mais discriminativa e, consequentemente, mais apropriada para a etapa de treinamento.
+\begin{table}[htb]
+  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
+  \begin{center}
+    \begin{tabular}{|c|c|l|}\hline
+      Classes &ex. & Descrição\\\hline\hline
+      $Cl_1$ (ex. $/z/$ )&$/z/$ & Fricativas vozeadas alveolares\\\hline
+      $Cl_2$&$/v/$ & Fricativas vozeadas labiodentais\\\hline
+      $Cl_3$&$/j/$ & Fricativas vozeadas palatais\\\hline
+      $Cl_4$&$/V/$ & Demais fonemas vozeados\\\hline
+      $Cl_5$&$/f/$ & Fricativas não-vozeadas labiodentais\\\hline
+      $Cl_6$&$/s/$ & Fricativas não-vozeadas alveolares\\\hline
+      $Cl_7$&$/x/$ & Fricativas não-vozeadas palatais\\\hline
+      $Cl_8$&$/U/$ & Demais fonemas não-vozeados\\\hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 %O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada pela PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta da Tabela~\ref{TebelaClasses}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
 
