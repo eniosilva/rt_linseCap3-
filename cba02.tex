@@ -28,7 +28,7 @@
 
 % CABEÇALHO
 
-\title{Clusterização Em Classes Fonéticas de Sinais de Fala de Banda Limitada}
+\title{Mineração de Dados e Classificação Fonética de Sinais de Fala de Banda Limitada}
 
 %\author{Ênio dos Santos Silva}{enio@linse.ufsc.br}
 \author{Ênio dos Santos Silva, Rui Seara}{enio@linse.ufsc.br, seara@linse.ufsc.br}
@@ -51,7 +51,7 @@ This work presents a selection strategy of speech signal parameters used for cla
 
 \selectlanguage{brazil}
 \begin{abstract}
- Este trabalho apresenta uma estratégia de seleção de parâmetros do sinal de fala objetivando aprimorar a classificação em classes fonéticas. Os parâmetros analisados são investigados através de um método baseado no algoritmo de árvore de decisão e \textit{principal component analysis} (PCA) seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores parâmetros a serem usados na composição de um classificador fonético.
+ Este trabalho apresenta uma estratégia de seleção de atributos característicos do sinal de fala objetivando aprimorar a classificação em grupos fonéticos. Os atributos analisados são investigados através de métodos baseados em algoritmos de \textit{machine learning}, técnicas de \textit{principal component analysis} (PCA) e \textit{mutual information} (MI), seguido do descarte de componentes de menor importância. Assim, a estratégia proposta consiste em identificar os atributos que facilitam a distinção entre grupos fonéticos diferentes. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição de classificadores fonéticos.
 
 %o tipo de inferência consiste em identificar os parâmetros que facilitam a distinção entre classes fonéticas distintas.
 %Um subconjunto desses parämetros é escolhido automaticamente através de um método baseado no algoritmo \textit{AdaBoost}. Os resultados das simulações permitem inferir acerca de quais os melhores parâmetros para a composição de um classificador.
@@ -79,7 +79,7 @@ A atividade de classificação de padrões é um processo inerente do ser humano. Pa
 
 %Dessa forma, o sinal de fala é análisado conforme os correspondentes sons constituintes do sinal.
 
-Neste trabalho de pesquisa, discutimos a classificação do sinal de fala em classes fonéticas. A classificação fonética é utilizada em uma ampla gama de aplicações nos mais variados tipos de sistemas de processamento de fala \cite{Hamooni2014}, \cite{Huang2012}, \cite{Alex2010}, \cite{Siyue2007} e \cite{EnioSBrT2013}. O objetivo da classificação fonética é determinar a classe fonética emitida por um interlocutor a partir de uma amostra do sinal de fala. Para tal, é necessária a realização de procedimentos de mineração de dados afim de destacar as características relevantes das amostras do sinal de fala, ou seja, selecionar os atributos mais característicos \cite{Klautau2003}.
+Neste trabalho de pesquisa, discutimos a classificação do sinal de fala em grupos fonéticos. A classificação fonética é utilizada em uma ampla gama de aplicações nos mais variados tipos de sistemas de processamento de fala \cite{Hamooni2014}, \cite{Huang2012}, \cite{Alex2010}, \cite{Siyue2007} e \cite{EnioSBrT2013}. O objetivo da classificação fonética é determinar a classe fonética emitida por um interlocutor a partir de uma amostra do sinal de fala. Para tal, é necessária a realização de procedimentos de mineração de dados afim de destacar as características relevantes das amostras do sinal de fala, ou seja, selecionar os atributos mais característicos \cite{Klautau2003}.
 
 %Dessa forma, um conjunto de parâmetros é extraído para cada amostra de fala. Após esse processamento, os parâmetros são inseridos em um algoritmo classificador que decidirá qual a classe fonética emitida. 
 
@@ -92,7 +92,7 @@ Em \cite{Klautau2003} a seleção de atributos foi aplicada à sistemas de reconhec
 
 Nos referidos trabalhos, os sinais considerados como referência são sinais de fala de banda larga, estes possuem geralmente frequência de amostragem superior à 16000 Hz e contêm componentes de frequências superiores à 3400 Hz. Em contraste, os algoritmos discutidos em \cite{Morales2009}, \cite{He2011} e \cite{Lee2012} utilizam como referência, sinais de fala de banda limitada aplicados à rede de telefonia pública (\textit{public switched telephone network} - PSTN). 
 
-Entretanto, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada. Desse modo as estratégias propostas tem seus desempenhos severamente degradados sempre que a classe fonética não é precisamente obtida. 
+Entretanto, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada. Desse modo as estratégias propostas apresentam desempenhos severamente degradados sempre que a classe fonética não é precisamente obtida. 
 
 Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Chigier91} e \cite{EnioSBrT2013} são apresentadas análises de atributos do sinal de fala em diferentes larguras de banda. Em \cite{Alex2010} e \cite{EnioSBrT2013} são propostas a classificação de um grupo específico de classes fonéticas nomeadas classes fricativas, as quais são caracterizadas por conterem energia espectral concentrada em altas frequências, também em \cite{EnioSBrT2013} constata-se um desempenho satisfatório do algoritmo para esse tipo de classe fonética.
 
