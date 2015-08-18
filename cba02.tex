@@ -44,14 +44,14 @@ Florianópolis, SC - Brasil}
 
 \selectlanguage{english}
 \begin{abstract}
-This work presents a selection strategy of speech signal parameters used for classification in phonetic classes. The parameters analyzed are investigated by a method based on the algorithm Principal Component Analysis (PCA) followed by disposal minor components. Thus, the proposed strategy is to identify the parameters that make it easier to distinguish between different phonetic classes. The simulation results allow us to infer about the selection of the best parameters to be used in the composition of a phonetic classifier.
+This work presents a feature selection strategy applied to the limited bandwidth of speech signals, aiming to build phonetic classifiers as well as the improvement of classification broad phonetic groups (BGP) with an emphasis on discrimination phonemes relevant to fricative phonetic group. The characteristic attributes of the speech signal are investigated by methods based on machine learning algorithms and component analysis metrics, such as mutual information (MI) and correlation-based feature selection (CFS). So many consecrated classifiers state of the art are investigated, resulting in a framework which is to identify the attributes that make it easy to distinguish between different BGP. The simulation results allow us to infer about the selection of the best attributes to be used in the composition of the phonetic classifiers.
 \end{abstract}
 
-\keywords{Phonetic classification.}
+\keywords{Pattern recognition, phonetic classification, feature selection, data minin.}
 
 \selectlanguage{brazil}
 \begin{abstract}
- Este trabalho apresenta uma estratégia de seleção de atributos aplicada à sinais de fala de banda limitada, objetivando a construção de classificadores fonéticos, bem como o aprimoramento da classificação em grupos fonéticos abrangentes (\textit{broad group phonetic} - BGP) com ênfase na discriminação dos fonemas pertinentes ao grupo fonético fricativo. Os atributos característicos do sinal de fala são investigados através de métodos baseados em algoritmos de aprendizagem de máquinas (\textit{machine learning}) e métricas de análise de componentes, tais como, informação mútua (\textit{mutual information} - MI) e selelçao de parâmetros baseada em correlação (\textit{correlation-based feature selection} - CFS), seguido do descarte de componentes de menor importância. Assim, diversos classificadores consagrados do estado-da-arte são investigados, resultando em um `\textit{framework}` que consiste em identificar os atributos que facilitam a distinção entre diferentes BGP. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição dos classificadores fonéticos.
+ Este trabalho apresenta uma estratégia de seleção de atributos aplicada à sinais de fala de banda limitada, objetivando a construção de classificadores fonéticos, bem como o aprimoramento da classificação em grupos fonéticos abrangentes (\textit{broad group phonetic} - BGP) com ênfase na discriminação dos fonemas pertinentes ao grupo fonético fricativo. Os atributos característicos do sinal de fala são investigados através de métodos baseados em algoritmos de aprendizagem de máquinas (\textit{machine learning}) e métricas de análise de componentes, tais como, informação mútua (\textit{mutual information} - MI) e seleçao de parâmetros baseada em correlação (\textit{correlation-based feature selection} - CFS). Assim, diversos classificadores consagrados do estado-da-arte são investigados, resultando em um `\textit{framework}` que consiste em identificar os atributos que facilitam a distinção entre diferentes BGP. Os resultados das simulações permitem inferir acerca da seleção dos melhores atributos a serem usados na composição dos classificadores fonéticos.
 \end{abstract}
 \keywords{Reconhecimento de padrões, classificação fonética, seleção de atributos, mineração de dados.}
 ]
@@ -154,31 +154,37 @@ Existem duas formas de se treinar um classificador: o aprendizado supervisionado
 
 Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E assim como em \cite{Patricia2007}, \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa investigamos classes fonéticas abrangentes (BGP) e o conjunto de classes fonéticas fricativas.
 
-O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta das classes ilustradas na Fig. \ref{tree}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
+O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. 
+
+Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas. Portanto, usando o conceito de classificação hierárquica presente em \cite{Hamooni2014} e de classes BGP presente em \cite{Patricia2007}, são propostas classes agrupadas hierárquicamente conforme a ilustração da Fig. \ref{tree}, a qual será utilizada como referência para o processo de classificação fonética dos sinais de fala.
 \begin{figure}[h]
 %\center
 \centering
 %\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
 %\includegraphics{figuras/Fig_2.eps}
 %\includegraphics[scale=0.95]{figuras/Fig_2.eps}
-\includegraphics[scale=0.2]{figures/tree.eps}
-\caption{\label{tree}Árvore de decisão fonética.}
+\includegraphics[scale=0.2]{figures/Diagrama1.eps}%tree.eps}
+\caption{\label{tree}Árvore fonética.}
 \end{figure}
-A Fig. \ref{tree} apresenta diferentes níveis de clusterização, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de clusterização as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
+
+A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de definição das classes, as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
 
 \begin{table}[htb]
   \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasse}
   \begin{center}
-    \begin{tabular}{|c|l|}\hline
-      Classes & Descrição\\\hline\hline
-      $Cl_1$ (ex.$/z/$)& Fricativas vozeadas alveolares\\\hline
-      $Cl_2$ (ex.$/v/$)& Fricativas vozeadas labiodentais\\\hline
-      $Cl_3$ (ex.$/j/$)& Fricativas vozeadas palatais\\\hline
-      $Cl_4$ (ex.$/a/$)& Demais fonemas vozeados\\\hline
-      $Cl_5$ (ex.$/s/$)& Fricativas não-vozeadas alveolares\\\hline
-      $Cl_6$ (ex.$/f/$)& Fricativas não-vozeadas labiodentais\\\hline
-      $Cl_7$ (ex.$/x/$)& Fricativas não-vozeadas palatais\\\hline
-      $Cl_8$ (ex.$/b/$)& Demais fonemas não-vozeados\\\hline
+    \begin{tabular}{|l|l|}\hline
+      Class.(ex.) & Descrição\\\hline\hline
+      $Cl_1$ ($/a/$)& Vogal\\\hline
+      $Cl_2$ ($/a~/$)& Nasal\\\hline
+      $Cl_3$ ($/z/$)& Fricativa vozeada alveolar\\\hline
+      $Cl_4$ ($/R/$)& Fricativa vozeada velar\\\hline
+      $Cl_5$ ($/Z/$)& Fricativa vozeada pós-alveolar\\\hline
+      $Cl_6$ ($/v/$)& Fricativa vozeada  labiodental\\\hline
+      $Cl_7$ ($/s/$)& Fricativas não-vozeadas alveolar\\\hline
+      $Cl_8$ ($/X/$)& Fricativas não-vozeadas glotal\\\hline
+      $Cl_9$ ($/tS/$)& Fricativas não-vozeadas pós-alveolar\\\hline
+      $Cl_{10}$ ($/f/$)& Fricativas não-vozeadas labiodental\\\hline
+      $Cl_{11}$ ($/b/$)& Oclusiva\\\hline
     \end{tabular}
   \end{center}
 \end{table}
@@ -186,9 +192,9 @@ A Fig. \ref{tree} apresenta diferentes níveis de clusterização, detalhes da clas
 %O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada pela PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta da Tabela~\ref{TebelaClasses}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
 
 \section{Extração e Seleção de Atributos}\label{selAtrib}
-A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes, ou mais utilizados, em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca, ou nenhuma, contribuição à tarefa de classificação. A redução da dimensionalidade dos dados limita o espaço de hipóteses de classificação e permite que os algorítmos operem mais rápidos e eficientes. Em alguns casos, pode-se aprimorar a precisão  da classificação; em outros, os resultados tornam-se mais compactos e de fácil representação das classes investigadas \cite{Hall2003}. Nesse contexto, a proposta deste trabalho é aplicar os classificadores, J.48, LMT, MLP, SVM e K-NN, à classificações fonéticas e investigar os atributos mais característicos na classificação, aplicando análises MI e CFS para seleção de atributos \cite{Webb2002}, \cite{bookweka}.
+A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes, ou mais utilizados, em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca, ou nenhuma, contribuição à tarefa de classificação. A redução da dimensionalidade dos dados limita o espaço de hipóteses de classificação e permite que os algorítmos operem mais rápidos e eficientes. Em alguns casos, pode-se aprimorar a precisão  da classificação; em outros, os resultados tornam-se mais compactos e de fácil representação das classes investigadas \cite{Hall2003}. Nesse contexto, a proposta deste trabalho é aplicar os algorítimos, J.48, LMT, MLP, SVM e K-NN, à classificações fonéticas e investigar os atributos mais característicos na classificação, aplicando análises MI e CFS para seleção de atributos \cite{Webb2002}, \cite{bookweka}.
 
-Assim como em \cite{Jax2004}, os seguintes atributos vetoriais e escalares são investigados:
+Assim como em \cite{Jax2004} e \cite{Alex2010}, os seguintes atributos vetoriais e escalares são investigados:
 \begin{itemize}
  \item A taxa de cruzamento por zero.
   \begin{equation}
@@ -235,7 +241,7 @@ Dessa forma, a etapa de extração de atributo resulta em vetores $\mathbf{x} = (x
 %de dimensão $L=71$, obtido a cada frame $f$ de duração de $10$ ms. 
 
 \subsection{Seleção de Atributos}
-Os métodos de seleção de atributos podem ser divididos em dois grupos: `\textit{filters}` e `\textit{wrappers}` \cite{bookweka}, \cite{Hall2003}. Este consite no método que seleciona atributos com base no algorítimo de aprendizagem $\zeta$ que será aplicado ao treinamento dos classificadores. Na maioria dos casos, é inviável que o método `\textit{wrappers}` explore todas as possibilidades do conjunto de treinamento. Sendo assim, métodos `\textit{wrappers}` geralmente adotam uma busca heurística (e possivelmente subótima) \cite{Klautau2003}. Métodos `\textit{filters}` avaliam o valor do atributo $x_i$ usando heurísticas como, por exemplo, a correlação de $x_i$ com a classe $y$. Dessa forma, métodos `\textit{filters}` demandam menor custo computacional do que os métodos `\textit{wrappers}` e são independentes de $\zeta$. Os métodos também podem ser divididos em métodos que avaliam um atributo individual, por exemplo métodos MI, e métodos que avaliam subconjuntos de atributos \cite{Hall2003}, como por exemplo métodos CFS.
+Os métodos de seleção de atributos podem ser divididos em dois grupos: `\textit{filters}` e `\textit{wrappers}` \cite{bookweka}, \cite{Hall2003}. Este consite no método que seleciona atributos com base no algorítimo de aprendizagem $\zeta$ que será aplicado ao treinamento dos classificadores. Na maioria dos casos, é inviável que o método `\textit{wrappers}` explore todas as possibilidades do conjunto de treinamento. Sendo assim, métodos `\textit{wrappers}` geralmente adotam uma busca heurística possivelmente subótima \cite{Klautau2003}. Métodos `\textit{filters}` avaliam o valor do atributo $x_i$ usando heurísticas como, por exemplo, a correlação de $x_i$ com a classe $y$. Dessa forma, métodos `\textit{filters}` demandam menor custo computacional do que os métodos `\textit{wrappers}` e são independentes de $\zeta$. Os métodos também podem ser divididos em métodos que avaliam um atributo individual, por exemplo métodos MI, e métodos que avaliam subconjuntos de atributos, como por exemplo métodos CFS \cite{Hall2003}.
 
 Neste artigo, MI e CFS são usados como base para a seleção de atributos. As hipóteses de que MI e CSF propiciam melhores atributos discriminativos são verificadas em \cite{Patricia2007} e \cite{Hall2003}. A informação mútua, também conhecida como ganho de informação (\textit{information gain} - IG), é descrita como segue. 
 
@@ -258,7 +264,7 @@ A selelçao de parâmetros baseada em correlação(\textit{correlation-based feature
 Merit_s=\frac{k_{\bar{r_{cf}}}} {\sqrt{k+k(k-1)\bar{r_{ff}}}},
 \end{equation}
 onde $Merit_s$ é o `mérito` heurístico do subconnunto de atributo $S$ conter $k$ atributos, $\bar{r_{cf}}$ a correlação média atributo-classe, e $\bar{r_{ff}}$ a intercorrelação média atributo-atributo. Para a aplicação da Equação (\ref{heuristic}) é necessário o cálculo da correlação (dependência) entre atributos. Para tal, em CFS, é utilizada a medida de incerteza simétrica para estimar o grau de associação entre os atributos ($X_i$ e $X_j$) \cite{bookweka}:
-\begin{equation}\label{heuristic}
+\begin{equation}
 SU=2\times [\frac{H(X_i)+H(X_j)-H(X_i,X_j)}{H(X_i)+H(X_j)}].
 \end{equation}
 
