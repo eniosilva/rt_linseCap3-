@@ -195,7 +195,7 @@ A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da clas
 A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes, ou mais utilizados, em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca, ou nenhuma, contribuição à tarefa de classificação. A redução da dimensionalidade dos dados limita o espaço de hipóteses de classificação e permite que os algorítmos operem mais rápidos e eficientes. Em alguns casos, pode-se aprimorar a precisão  da classificação; em outros, os resultados tornam-se mais compactos e de fácil representação das classes investigadas \cite{Hall2003}. Nesse contexto, a proposta deste trabalho é aplicar os algorítimos, J.48, LMT, MLP, SVM e K-NN, à classificações fonéticas e investigar os atributos mais característicos na classificação, aplicando análises MI e CFS para seleção de atributos extraídos a partir de sinais de banda limitada amostrados à taxa de $8000$ Hz e contendo componentes de frequências de $0$ a $3400$ Hz \cite{Webb2002}, \cite{bookweka}.
 
 \subsection{Extração de Atributos}\label{selAtrib}
-Assim como em \cite{Jax2004} e \cite{Alex2010}, os seguintes atributos vetoriais e escalares são investigados:
+Assim como em \cite{GolubThesis2000}, \cite{Jax2004} e \cite{Alex2010}, os seguintes atributos vetoriais e escalares são investigados:
 \begin{itemize}
  \item A taxa de cruzamento por zero.
   \begin{equation}
@@ -225,6 +225,12 @@ onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \le
       x_{k} = log \frac{1}{N} \sum_{k=0}^{N-1} s^4(k) - 2 log \frac{1}{N} E(m).
    % \end{array}
   \end{equation}
+ \item O centróide.
+  \begin{equation}
+   % \begin{array}{l}
+      x_{c} = \frac{1}{N}\frac{\sum_{f=1}^Ne_flog_2f}{\sum_{f=1}^Ne_f}.
+   % \end{array}
+  \end{equation}
  \item O centróide espectral.
   \begin{equation}
    % \begin{array}{l}
@@ -233,14 +239,20 @@ onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \le
   \end{equation}
  \item O \textit{spectral flatness}.
   \begin{equation}
-      x_{sf} = log_2(1+(\frac{1}{N}\sum_{k=1}^N|s(k)|)).
+      x_{sf} = log_2\left(1+\left(\frac{1}{N}\sum_{k=1}^N|s(k)|\right)\right).
   \end{equation}
  \item A uniformidade.
   \begin{equation}
-      u = 
+      u = -\sum_{f=1}^N\left(\frac{e_f}{\sum_{f=1}^Ne_f}\right)log_N\left(\frac{e_f}{\sum_{f=1}^Ne_f}\right).
   \end{equation}
  \item A estimativa de audibilidade (\textit{loundness})
+  \begin{equation}
+      l = log_2\left(1+\frac{1}{N}\sum_{t=1}^N|a_t|\right).
+  \end{equation}
  \item A estimativa da largura de banda.
+  \begin{equation}
+      B = \sqrt{\frac{\sum_{f=1}^N(x_c-log_2f)^2e_f}{\sum_{f=1}^Ne_f}}
+  \end{equation}
  \item Doze coeficientes de predição linear (\textit{linear predictive coding} - LPC).
  \item Os dez primeiros coeficientes de reflexão.
  \item Os treze primeiros coeficientes espectrais da escala \textit{mel} (MFCC), seguidos de suas primeiras e segundas derivadas (velocidade e aceleração) sobre uma janela temporal de três sucessivos \textit{frames}.
