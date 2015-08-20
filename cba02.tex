@@ -197,7 +197,7 @@ A técnica de seleção de atributos tem como objetivo mostrar quais os atributos m
 \subsection{Extração de Atributos}\label{selAtrib}
 Assim como em \cite{GolubThesis2000}, \cite{Jax2004} e \cite{Alex2010}, os seguintes atributos vetoriais e escalares são investigados:
 \begin{itemize}
- \item A taxa de cruzamento por zero.
+ \item A taxa de cruzamento por zero
   \begin{equation}
    % \begin{array}{l}
       x_{zcr} = \frac{\sum_{k=2}^{N} \frac{1}{2} |Sinal[s(k)]-Sinal[s(k-1)]|}{(N-1)},
@@ -212,53 +212,70 @@ onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \le
    % \end{array}
   \end{equation}
   A variável $\Psi(k)$ representa o sinal do gradiente $s(k)-s(k-1)$, i.e, $\Psi(k) \in \{-1,1\}$, e $\Psi(k) = 1/2 |\Psi(k)-\Psi(k-1)|$.
- \item A energia do frame
+
+ \item A energia normalizada do \textit{frame}
   \begin{equation}
-    %\begin{array}{l}
-      E(m)=\sum_{k=0}^{N-1}s^2(k),
-    %\end{array}
+	  x_{nrp}(m)=\frac{logE(m)-logE_{min}(m)}{log\bar{E}(m)-logE_{min}(m)},
   \end{equation}
-  onde $m$ representa o \textit{frame} atual e $N$ o número de amostras por \textit{frame}.
- \item A estimativa do \textit{kurtosis} local.
+  com 
+\begin{equation*}
+  \begin{align}
+ %\begin{array}{rcl}
+    E(m) &= \sum_{k=0}^{N-1}s^2(k) \\
+    E_{min}(m) &= \operatorname*{min}_{\mu=0}^{N_{min}}E(m-\mu)\\
+    \bar{E}(m) &= \alpha\bar{E}(m-1)+(1-\alpha)E(m),\\
+ %\end{array}
+  \end{align}
+\end{equation*}
+  onde $m$ representa o \textit{frame} atual, $N$ o número de amostras por \textit{frame}, o fator de esquecimento é ajustado para $\alpha = 0.96$, e a janela de busca mínima é de $N_{min}=200$.
+
+ \item A estimativa do \textit{kurtosis} local
   \begin{equation}
    % \begin{array}{l}
       x_{k} = log \frac{1}{N} \sum_{k=0}^{N-1} s^4(k) - 2 log \frac{1}{N} E(m).
    % \end{array}
   \end{equation}
- \item O centróide.
+ 
+\item O centróide
   \begin{equation}
    % \begin{array}{l}
       x_{c} = \frac{1}{N}\frac{\sum_{f=1}^Ne_flog_2f}{\sum_{f=1}^Ne_f}.
    % \end{array}
   \end{equation}
- \item O centróide espectral.
+
+ \item O centróide espectral
   \begin{equation}
    % \begin{array}{l}
       x_{sc} = \frac{\sum_{i=0}^{M/2} i . |S(e^{j\Omega_i})|}{(\frac{M}{2} + 1)\sum_{i=0}^{M/2}|S(e^{j\Omega_i})|}.
    % \end{array}
   \end{equation}
- \item O \textit{spectral flatness}.
+ 
+\item O \textit{spectral flatness}
   \begin{equation}
       x_{sf} = log_2\left(1+\left(\frac{1}{N}\sum_{k=1}^N|s(k)|\right)\right).
   \end{equation}
- \item A uniformidade.
+
+ \item A uniformidade
   \begin{equation}
       u = -\sum_{f=1}^N\left(\frac{e_f}{\sum_{f=1}^Ne_f}\right)log_N\left(\frac{e_f}{\sum_{f=1}^Ne_f}\right).
   \end{equation}
+
  \item A estimativa de audibilidade (\textit{loundness})
   \begin{equation}
       l = log_2\left(1+\frac{1}{N}\sum_{t=1}^N|a_t|\right).
   \end{equation}
- \item A estimativa da largura de banda.
+
+ \item A estimativa da largura de banda
   \begin{equation}
       B = \sqrt{\frac{\sum_{f=1}^N(x_c-log_2f)^2e_f}{\sum_{f=1}^Ne_f}}
   \end{equation}
+
  \item Doze coeficientes de predição linear (\textit{linear predictive coding} - LPC).
  \item Os dez primeiros coeficientes de reflexão.
  \item Os treze primeiros coeficientes espectrais da escala \textit{mel} (MFCC), seguidos de suas primeiras e segundas derivadas (velocidade e aceleração) sobre uma janela temporal de três sucessivos \textit{frames}.
 \end{itemize}
 
-Dessa forma, a etapa de extração de atributo resulta em vetores $\mathbf{x} = (x_1,\ldots,x_L)$, obtidos à uma taxa $r$ onde $1/r$ representa a duração do `\textit{frame}`, $L=71$ atributos e $r = 100$ Hz.
+Dessa forma, a etapa de extração de atributo resulta em vetores $\mathbf{x} = (x_1,\ldots,x_L)$, obtidos à uma taxa $r$ onde $1/r$ representa a duração do \textit{frame}, $L=71$ atributos e $r = 100$ Hz.
 %de dimensão $L=71$, obtido a cada frame $f$ de duração de $10$ ms. 
 
 \subsection{Seleção de Atributos}
@@ -292,12 +309,12 @@ SU=2\times [\frac{H(X_i)+H(X_j)-H(X_i,X_j)}{H(X_i)+H(X_j)}].
 
 %Dessa forma, a etapa de extração de atributo resulta no vetor $\mathbf{x}$ de dimensão $L=71$, obtido a cada frame $f$ de duração de $10$ ms. Neste artigo, MI e CFS são usados como base para a seleção de atributos. As hipóteses de que MI e CSF propiciam atributos discriminativos é verificada em \cite{Patricia2007} e \cite{Hall2003}.
 
-\section{Algoritmo de Clusterização}\label{algCluster}
+\section{Algoritmo de Classificação}\label{algCluster}
 \subsection{Treinamento de Classificadores}
+%\section{Análise da Classificação}
+%O processo de treinamento aqui utilizado considera as técnicas de \textit{codebooks} duais de banda estreita $X^{\NB}_{\CB}$ e de banda alta $Y^{\UP}_{\CB}$~\cite{unno05}, criados a partir do agrupamento dos vetores de parâmetros $\mathbf{x}^{NB}$ e $\mathbf{y}^{UP}$ em classes fonéticas dispostas de acordo com a Tabela~\ref{TebelaClasses}
 \section{Resultado e Análise de Desempenho}\label{resultados}
 \section{Conclusões e Comentários Finais}\label{conclusao}
-
-
 
 %\begin{table}[htb]
 %  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
@@ -320,66 +337,6 @@ SU=2\times [\frac{H(X_i)+H(X_j)-H(X_i,X_j)}{H(X_i)+H(X_j)}].
 %% }
 %  \end{center}
 %\end{table}
-
-
-\section{Análise da Classificação}
-
-O processo de treinamento aqui utilizado considera as técnicas de \textit{codebooks} duais de banda estreita $X^{\NB}_{\CB}$ e de banda alta $Y^{\UP}_{\CB}$~\cite{unno05}, criados a partir do agrupamento dos vetores de parâmetros $\mathbf{x}^{NB}$ e $\mathbf{y}^{UP}$ em classes fonéticas dispostas de acordo com a Tabela~\ref{TebelaClasses}
-
-\begin{table}[htb]
-  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
-  \begin{center}
-  \begin{tabular}{|c|c|}\hline
-  Classes &  Descrição\\\hline\hline
-    $Cl_1$& Fricativas vozeadas alveolares\\\hline
-    $Cl_2$& Fricativas vozeadas labiodentais\\\hline
-    $Cl_3$& Fricativas vozeadas palatais\\\hline
-    $Cl_4$& Demais fonemas vozeados\\\hline
-    $Cl_5$& Fricativas não-vozeadas labiodentais\\\hline
-    $Cl_6$& Fricativas não-vozeadas alveolares\\\hline
-    $Cl_7$& Fricativas não-vozeadas palatais\\\hline
-    $Cl_8$& Demais fonemas não-vozeados\\\hline
-    $Cl_9$& Silêncio\\\hline
-  \end{tabular}
-  \end{center}
-\end{table}
-
-Deste modo, um treinamento supervisionado é realizado e o agrupamento dos vetores de parâmetros $\mathbf{x}^{NB}$ e $\mathbf{y}^{UP}$ torna-se mais discriminativo. Assim, cada \textit{codebook} é associado a uma classe fonética específica $\phi$, isto é, 
-\begin{equation}
-\begin{array}{r}
-Y^{\UP}_{{\CB}_{\phi}}=E\{Y^{\UP} | \phi=Cl_i\}\\ % \, \in \, \Re^9 %\, \forall \, i=1 \ldots 9
-X^{\NB}_{{\CB}_{\phi}}=E\{X^{\NB} | \phi=Cl_i\} 
-\end{array}, \quad \forall i \in \, [1,9]
-\end{equation}
-
-\subsection{Estimação da Classe Fonética e dos Parâmetros do Trato Vocal para ABWE}
-Para a estimação das classes fonéticas, $\phi \in \{Cl_1, \ldots, Cl_9\}$, o algoritmo de árvore de decisão J48 é utilizado \cite{bookweka}, \cite{algorithmJ48}. A cada \textit{frame} de 20 ms são extraídos vetores de observação contendo os seguintes parâmetros: os 10 primeiros coeficientes de auto-correlação, a taxa de cruzamento por zero, o índice de gradiente, a energia normalizada do frame, Kurtosis local e a centróide espectral, como apresentado em ~\cite{PJaxThesis}. A partir dos vetores de observação, a árvore de decisão é consultada e a classe fonética correspondente é obtida. A abordagem de agrupamento de classes similares (veja Tabela~\ref{TebelaClasses}) aumenta a robustez quanto a erros de classificação, reduzindo eventuais imprecisões de singularidades acústicas. A robustez é garantida porque mesmo havendo falhas de classificação, as classes fonéticas estimadas não estarão tão distantes de suas versões corretas.
-%Para a estimação das classes fonéticas, $\phi \in \{Cl_1, \ldots, Cl_9\}$ é utilizado o algoritmo de árvore de decisão J48~\cite{bookweka}, ~\cite{algorithmJ48}. A cada \textit{frame} de 20 ms são extraídos vetores de observação contendo os seguintes parâmetros: os 10 primeiros coeficientes de auto-correlação, a taxa de cruzamento por zero, o índice de gradiente, a energia normalizada do frame, Kurtosis local e a centróide espectral, como apresentado em ~\cite{PJaxThesis}. A partir dos vetores de observação, a árvore de decisão é consultada e a classe fonética correspondente é obtida. A abordagem de agrupamento de classes similares (veja Tabela~\ref{TebelaClasses}) aumenta a robustez quanto a erros de classificação, reduzindo eventuais imprecisões de singularidades acústicas devido às classes fonéticas estimadas, quando falhas, não estarem tão distantes de suas versões corretas.
-
-Supõe-se aqui que $\mathbf{q}^{\UP}$ representa os vetores que caracterizam o modelo do trato vocal de banda alta, $\mathbf{q}^{\UP} \supset [\mathbf{t}, \mathbf{f}_{\LSF}]$. Assim, $\mathbf{q}^{\UP}$ é organizado em uma matriz de \textit{codewords} $\mathbf{Q}(n | Y^{\UP}_{\CB_{\phi}})$ de acordo com as suas correspondentes classes fonéticas $\phi$. Dessa maneira, para a estimação de $\hat{\mathbf{q}}_{UP}$, uma vez determinada a classe, $\phi$, do \textit{frame} do segmento de fala NB no instante $n$, as $K$ \textit{codewords} mais similares aos vetores $\mathbf{f}_{\LSF,n}$ e $\mathbf{t}_n$ do \textit{codebook} ${Y}^{\UP}_{{\CB}_{\phi}}$ são selecionadas via \textit{codebook dual} ${X}^{\NB}_{{\CB}_{\phi}}$, isto é,
-\begin{equation}
-\begin{array}{l}
-\mathbf{Q}(n | Y^{\UP}_{\CB_{\phi}}) = \{\mathbf{q}^{\UP}_1(n|{X}^{\NB}_{{\CB}_{\phi}}),\mathbf{q}^{\UP}_2(n|{X}^{\NB}_{{\CB}_{\phi}}),..., \\
-\mathbf{q}^{\UP}_{K}(n|{X}^{\NB}_{{\CB}_{\phi}})\}
-\end{array}
-\end{equation}
-e os correspondentes vetores $\mathbf{f}_{\LSF,n}$ e $\mathbf{t}_n$ de banda alta são combinados linearmente com pesos $w$, calculados via distâncias euclidianas~\cite{unno05}, para cada \textit{codeword}. Assim,
-\begin{equation}
-\hat{\mathbf{q}}_{\UP}(n) = \sum_{m=1}^{K} w_m \cdot \mathbf{q}^{\UP}_{m}(n | X^{\NB}_{\CB_{\phi}}) \; \forall \; \mathbf{q}^{\UP}_m \supset [\mathbf{f}_{\LSF}, \mathbf{t}]
-\end{equation}
-%para
-%\begin{equation}
-%S_{up} \supset [\mathbf{f}_{LSF}^{up}, \mathbf{t}^{up}]
-%\end{equation}
-onde $\mathbf{q}^{\UP}_{m}$ representa as \textit{codewords} constituídas pelos parâmetros $\mathbf{f}_{\LSF}$ e $\mathbf{t}$ de banda alta. Assim,
-\begin{equation}
-\begin{array}{l}
-\hat{\mathbf{q}}^{\UP}(n) \supset [\hat{\mathbf{t}}_n, \hat{\mathbf{f}}_{\LSF,n}]\\
-\hat{s}_{\UP}(n) = [\hat{s}_{\UP}^{\exci}(n) * \hat{\mathbf{t}}_n] * \hat{\mathbf{f}}_{\LSF,n} \\
-%\hat{s}_{\UP}(n) = \hat{s}_{\UP}^{\exci}(n) * \hat{\mathbf{q}}_{\UP}(n) \\
-\hat{s}_{\WB}(n) =  \hat{s}_{\UP}(n) + s_{\NB}(n).
-\end{array}
-\end{equation}
 
 \bibliography{cba02}
 \end{document}
