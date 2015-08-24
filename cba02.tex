@@ -318,12 +318,27 @@ Em uma tarefa de classificação fonética, o objetivo central é observar uma amost
 
 Na fase de treinamento, o processo de ``aprendizagem`` do classificador é realizado através de conjuntos de amostras de treino, que apresentam atributos característicos para cada classe fonética. Independente se o sistema está em fase de treinamento ou de testes, o \textit{front-end} está sempre presente, para obter os atributos que servirão de entrada para o classificador.
 
-Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. Assim, ele forma agrupamentos naturais, chamados \textit{clusters}, dos padrões de entrada \cite{duda2001}. Estes \textit{clusters} podem ser considerados como classes que o próprio classificador identificou. %É óbvio que neste caso, se houver imprecisões nos dados de entrada, o desempenho da classificação será prejudicado.
+Existem duas formas de se treinar um classificador: o aprendizado supervisionado e o aprendizado não-supervisionado. No primeiro, é fornecido um rótulo para cada classe durante a fase de treinamento, para ajudar o classificador a distinguir as características de cada classe. No segundo, apenas os exemplos de treinamento são disponibilizados ao classificador. Assim, ele forma agrupamentos naturais, chamados \textit{clusters}, dos padrões de entrada \cite{duda2001}. Estes \textit{clusters} podem ser considerados como classes que o próprio classificador identificou. 
 
-Neste trabalho, utilizamos o método de aprendizagem supervisionada e investigamos os seguintes classificadores: árvores de decisão J.48 e LMT, redes neurais de múltiplas camadas (MLP), máquinas de vetores de suporte (SVM) e \textit{k-nearest neighbor} (K-NN). Detalhes e configurações são descritos na Tabela \ref{TebelaClassificadores}
+Neste trabalho, utilizamos o método de aprendizagem supervisionada e investigamos os seguintes classificadores: árvores de decisão J.48 e LMT, redes neurais de múltiplas camadas (MLP), máquinas de vetores de suporte (SVM) e \textit{k-nearest neighbor} (K-NN). A descrição detalhada desses algorítmos é apresentada em \cite{bookweka} e uma breve descrição é exposta aqui.
 
+\subsection{Árvore de decisão J48 e LMT}
+Dentre vários algorítmos de aprendizagem de máquinas, a árvore de decisão pode ser caracterizada como uma das mais utilizadas. Ela representa um mapeamento dos atributos de dados e consiste em nós que apontam para duas ou mais sub-árvores. Um nó calcula um resultado específico, que é baseado no valor da instância e cada resultado possível está relacionada com uma das sub-árvores. O algorítmo J48 é a implementação em java da árvore de decisão C4.5 e é um método eficiente para estimação e classificação de dados incompletos e imprecisos. A algorítmo LMT é estruturado como uma árvore de decisão padrão contendo funções de regressão lógicas em cada nó.
+
+\subsection{Rede neural de múltiplas camadas (MLP)}
+A rede neural é um sistema adaptativo que muda a sua estrutura com base em informações externas ou internas, as quais seguem através da rede durante uma fase inicial de aprendizagem. Em termos práticos, as redes neurais são ferramentas não-lineares de modelagem estatística de dados. Eles podem ser utilizadas para modelar relações complexas entre entradas e saídas ou para encontrar padrões nos dados. Neste trabalho, investigamos o algoritmo \textit{back propagation} MLP.
+
+\subsection{Máquinas de vetores de suporte (SVM)}
+SVM é uma abordagem de aprendizagem de máquina com base no princípio da minimização do risco estrutural da teoria de aprendizagem estatística. O algorítmo é baseado no conceito de planos de decisão que definem limites de decisão. Um plano de decisão é aquela que separa um conjunto de objetos dentre diferentes associações de classe.
+
+\subsection{\textit{K-nearest neighbor} (K-NN)}
+Uma das formas mais simples de algoritmos de classificação são implementações de K-NN. Tais técnicas de aprendizagem são descritas como algoritmos de aprendizagem estatística e são geradas pelo simples armazenamento dos dados fornecidos. Durante a classificação, uma métrica de distância é escolhida e os novos dados são comparados com todos os demais dados já ``memorizados``. O novo dado é atribuído à classe que é mais comum entre os seus k vizinhos mais próximos. O número de vizinhos mais próximos (K) pode ser configurado manualmente ou automaticamente determinado usando validação cruzada.
+
+
+\section{Treinamento e Arquitetura dos Classificadores}
+Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}. WEKA consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítimos de classificação listados na Seção \ref{algCluster} são configurados e utilizados no WEKA. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
 \begin{table}[htb]
-  \caption{Descrição dos classificadores}\label{TebelaClassificadores}
+  \caption{Configuração dos classificadores}\label{TebelaClassificadores}
   \begin{center}
     \begin{tabular}{|l|l|}\hline
       Classificador & Configuração\\\hline\hline
@@ -336,12 +351,20 @@ Neste trabalho, utilizamos o método de aprendizagem supervisionada e investigamo
   \end{center}
 \end{table}
 
-\subsection{Treinamento de Classificadores}
-Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. Também foi o utilizado a plataforma de código livre Weka.
+\subsection{Arquitetura de Classificação}
+O sistema proposto de classificação hierárquica, primeiro analisa a qual BGP cada \textit{frame} pertence. Caso o \textit{frame} analisado pertença ao grupo fonético fricativo, um novo classificador é utilizado para a detecção de classes vozeadas ou não-vozeadas. Finalmente, estimado o vozeamento do \textit{frame}, um terceiro classificador é aplicado para identificação do tipo de fonema fricativo. A Fig. TAL ilustra o processo de classificação hieráquica proposto.
 
-\section{Resultado e Análise de Desempenho}\label{resultados}
-Objetivando a comparação da eficácia da seleção de atributos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores fonéticos consagrados do estado-da-arte e quase sempre presente em aplicações de mineração de dados. Assim como no treinamento, os resultados de classificação. to perform the benchmark experimenter we use Weka a powerful open-source machine learning workbench.
+FIGURA TAL
+
+Para cada nível hierárquico de classificação um subconjunto dos atributos de entrada, $\mathbf{x} = (x_1,\ldots,x_L)$, é utilizado. Esses subconjuntos são previamente investigados conforme as mátricas de seleção de atributos descritas na Seção TAL e constituem a etapa de \textit{front-end} dos classificadores.
+
+
+\section{Resultados e Análise de Desempenho}\label{resultados}
+Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores listados na Seção TAL. A fig. TAL apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. 
+
+%Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores fonéticos consagrados do estado-da-arte e quase sempre presente em aplicações de mineração de dados. Assim como no treinamento, os resultados de classificação. to perform the benchmark experimenter we use Weka a powerful open-source machine learning workbench.
 \section{Conclusões e Comentários Finais}\label{conclusao}
+Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de Seleção de Parâmetros tem como função mostrar quais os parâmetros mais relevantes em uma tarefa de classificação.
 
 %\begin{table}[htb]
 %  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
