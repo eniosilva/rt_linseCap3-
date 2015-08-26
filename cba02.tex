@@ -5,6 +5,7 @@
 \usepackage{multirow}
 \usepackage{amsmath}
 \usepackage{subfigure}
+\usepackage{scalefnt}
 
 %% Declaração de Operadores Matemáticos
 \DeclareMathOperator{\NB}{NB}
@@ -176,24 +177,47 @@ Portanto, com base em \cite{Patricia2007}, \cite{Alex2010} e \cite{EnioSBrT2013}
 A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de definição das classes, as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
 
 \begin{table}[htb]
+\scalefont{0.7}
   \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasse}
   \begin{center}
-    \begin{tabular}{|l|l|}\hline
-      Class.(ex.) & Descrição\\\hline\hline
-      $Cl_1$ ($/a/$)& Vogal\\\hline
-      $Cl_2$ ($/a~/$)& Nasal\\\hline
-      $Cl_3$ ($/z/$)& Fricativa vozeada alveolar\\\hline
-      $Cl_4$ ($/R/$)& Fricativa vozeada velar\\\hline
-      $Cl_5$ ($/Z/$)& Fricativa vozeada pós-alveolar\\\hline
-      $Cl_6$ ($/v/$)& Fricativa vozeada  labiodental\\\hline
-      $Cl_7$ ($/s/$)& Fricativas não-vozeadas alveolar\\\hline
-      $Cl_8$ ($/X/$)& Fricativas não-vozeadas glotal\\\hline
-      $Cl_9$ ($/tS/$)& Fricativas não-vozeadas pós-alveolar\\\hline
-      $Cl_{10}$ ($/f/$)& Fricativas não-vozeadas labiodental\\\hline
-      $Cl_{11}$ ($/b/$)& Oclusiva\\\hline
-    \end{tabular}
+  \begin{tabular}{|l|c|c|c|}\hline
+  \multicolumn{4}{|c|}{Classificação hierárquica} \\\hline\hline
+  Classes & BGP & Vozeamento & Ponto de Articulação\\\hline\hline
+  $C_{l1}$ & Vogal &\multirow{3}{*}{--}&\multirow{3}{*}{--}\\\cline{1-2}
+  $C_{l2}$ & Nasal & &\\\cline{1-2}
+  $C_{l3}$ & Oclusiva& &\\\hline
+  $C_{l411}$ & \multirow{8}{*}{Fricativa}&\multirow{4}{*}{Vozeado}    &Alveolar\\\cline{1-1}\cline{4-4}
+  $C_{l412}$ &                           &                            &Velar\\\cline{1-1}\cline{4-4}
+  $C_{l413}$ &                           &                            &Pós-alveolar\\\cline{1-1}\cline{4-4}
+  $C_{l414}$ &                           &                            &Labiodental\\\cline{1-1}\cline{3-4}
+  $C_{l421}$ &                           &\multirow{4}{*}{Não vozeado}&Alveolar\\\cline{1-1}\cline{4-4}
+  $C_{l422}$ &                           &                            &Glotal\\\cline{1-1}\cline{4-4}
+  $C_{l423}$ &                           &                            &Pós-alveolar\\\cline{1-1}\cline{4-4}
+  $C_{l424}$ &                           &                            &Labiodental\\\hline
+  \end{tabular}
   \end{center}
 \end{table}
+
+%\begin{table}[htb]
+%  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasse}
+%  \begin{center}
+%    \begin{tabular}{|l|l|}\hline
+%      Class.(ex.) & Descrição\\\hline\hline
+%      $Cl_1$ ($/a/$)& Vogal\\\hline
+%      $Cl_2$ ($/a~/$)& Nasal\\\hline
+%      $Cl_3$ ($/z/$)& Fricativa vozeada alveolar\\\hline
+%      $Cl_4$ ($/R/$)& Fricativa vozeada velar\\\hline
+%      $Cl_5$ ($/Z/$)& Fricativa vozeada pós-alveolar\\\hline
+%      $Cl_6$ ($/v/$)& Fricativa vozeada  labiodental\\\hline
+%      $Cl_7$ ($/s/$)& Fricativas não-vozeadas alveolar\\\hline
+%      $Cl_8$ ($/X/$)& Fricativas não-vozeadas glotal\\\hline
+%      $Cl_9$ ($/tS/$)& Fricativas não-vozeadas pós-alveolar\\\hline
+%      $Cl_{10}$ ($/f/$)& Fricativas não-vozeadas labiodental\\\hline
+%      $Cl_{11}$ ($/b/$)& Oclusiva\\\hline
+%    \end{tabular}
+%  \end{center}
+%\end{table}
+
 %O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada pela PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas, resultando na proposta da Tabela~\ref{TebelaClasses}, a qual será utilizada como referência para o processo de clusterização dos sinais de fala.
 \section{Extração e Seleção de Atributos}\label{selAtrib}
 Para o aprimoramento da classificação fonética, é necessária a realização de procedimentos de mineração de dados afim de destacar as características relevantes das amostras do sinal de fala, ou seja, selecionar os atributos mais característicos \cite{Klautau2003}, \cite{Hall2003}. A técnica de seleção de atributos tem como objetivo mostrar quais os atributos mais relevantes, ou mais utilizados, em uma tarefa de classificação, possibilitando, assim, descobrir quais os atributos redundantes, que trazem pouca, ou nenhuma, contribuição à tarefa de classificação. A redução da dimensionalidade dos dados limita o espaço de hipóteses de classificação e permite que os algorítmos operem mais rápidos e eficientes. Em alguns casos, pode-se aprimorar a precisão  da classificação; em outros, os resultados tornam-se mais compactos e de fácil representação das classes investigadas \cite{Hall2003}. Nesse contexto, a proposta deste trabalho é aplicar os algorítimos, J.48, LMT, MLP, SVM e K-NN, à classificações fonéticas e investigar os atributos mais característicos na classificação, aplicando análises MI e CFS para seleção de atributos extraídos a partir de sinais de banda limitada amostrados à taxa de $8000$ Hz e contendo componentes de frequências de $0$ a $3400$ Hz \cite{Webb2002}, \cite{bookweka}.
@@ -365,28 +389,6 @@ Objetivando a comparação da eficácia da seleção de atributos para os diferentes 
 %Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores fonéticos consagrados do estado-da-arte e quase sempre presente em aplicações de mineração de dados. Assim como no treinamento, os resultados de classificação. to perform the benchmark experimenter we use Weka a powerful open-source machine learning workbench.
 \section{Conclusões e Comentários Finais}\label{conclusao}
 Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de Seleção de Parâmetros tem como função mostrar quais os parâmetros mais relevantes em uma tarefa de classificação.
-
-%\begin{table}[htb]
-%  \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasses}
-%  \begin{center}
-%% {\tt
-%  \begin{tabular}{|c|c|c|c|c|c|}\hline
-%  \multicolumn{4}{|c|}{Classes} & \multirow{2}{*}{ex.} & \multirow{2}{*}{Descrição}\\\cline{1-4}
-%  2&3&5&9&&\\\hline\hline
-%  %&&C1&$/z/$ & Fricativas vozeadas alveolares\\\hline
-%  \multirow{8}{*}{A1}&\multirow{4}{*}{B1}&\multirow{3}{*}{C1}&D1&$/z/$ & Fricativas vozeadas alveolares\\\cline{4-6}
-%     & & &D2&$/v/$ & Fricativas vozeadas labiodentais\\\cline{4-6}
-%     & & &D3&$/j/$ & Fricativas vozeadas palatais\\\cline{3-6}
-%     & &C2 &D4&$/V/$ & Demais fonemas vozeados\\\cline{2-6}
-%     &\multirow{4}{*}{B2}&\multirow{3}{*}{B3}&D5&$/f/$ & Fricativas não-vozeadas labiodentais\\\cline{4-6}
-%     & & &D6&$/s/$ & Fricativas não-vozeadas alveolares\\\cline{4-6}
-%     & & &D7&$/x/$ & Fricativas não-vozeadas palatais\\\cline{3-6}
-%     & &C4 &D8&$/U/$ & Demais fonemas não-vozeados\\\hline
-%  A2 &B3 &C5 &D9&$/Sil/$ & Silêncio\\\hline
-%  \end{tabular}
-%% }
-%  \end{center}
-%\end{table}
 
 \bibliography{cba02}
 \end{document}
