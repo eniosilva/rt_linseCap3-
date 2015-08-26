@@ -177,12 +177,12 @@ Portanto, com base em \cite{Patricia2007}, \cite{Alex2010} e \cite{EnioSBrT2013}
 A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de definição das classes, as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
 
 \begin{table}[htb]
-\scalefont{0.7}
+\scalefont{0.9}
   \caption{Distribuição de classes fonéticas  para sinais de fala}\label{TebelaClasse}
   \begin{center}
   \begin{tabular}{|l|c|c|c|}\hline
   \multicolumn{4}{|c|}{Classificação hierárquica} \\\hline\hline
-  Classes & BGP & Vozeamento & Ponto de Articulação\\\hline\hline
+  Classes & BGP & Vozeamento & Articulação\\\hline\hline
   $C_{l1}$ & Vogal &\multirow{3}{*}{--}&\multirow{3}{*}{--}\\\cline{1-2}
   $C_{l2}$ & Nasal & &\\\cline{1-2}
   $C_{l3}$ & Oclusiva& &\\\hline
@@ -190,7 +190,7 @@ A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da clas
   $C_{l412}$ &                           &                            &Velar\\\cline{1-1}\cline{4-4}
   $C_{l413}$ &                           &                            &Pós-alveolar\\\cline{1-1}\cline{4-4}
   $C_{l414}$ &                           &                            &Labiodental\\\cline{1-1}\cline{3-4}
-  $C_{l421}$ &                           &\multirow{4}{*}{Não vozeado}&Alveolar\\\cline{1-1}\cline{4-4}
+  $C_{l421}$ &                           &\multirow{4}{*}{Não-vozeado}&Alveolar\\\cline{1-1}\cline{4-4}
   $C_{l422}$ &                           &                            &Glotal\\\cline{1-1}\cline{4-4}
   $C_{l423}$ &                           &                            &Pós-alveolar\\\cline{1-1}\cline{4-4}
   $C_{l424}$ &                           &                            &Labiodental\\\hline
@@ -306,7 +306,7 @@ onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \le
 Dessa forma, a etapa de extração de atributo resulta em vetores $\mathbf{x} = (x_1,\ldots,x_L)$, obtidos à uma taxa $r$ onde $1/r$ representa a duração do \textit{frame} com $L=71$ atributos e $r = 100$ Hz.
 %de dimensão $L=71$, obtido a cada frame $f$ de duração de $10$ ms. 
 
-\subsection{Seleção de Atributos}
+\subsection{Seleção de Atributos}\label{SelAtrib}
 Os métodos de seleção de atributos podem ser divididos em dois grupos: `\textit{filters}` e `\textit{wrappers}` \cite{bookweka}, \cite{Hall2003}. Este consite no método que seleciona atributos com base no algorítimo de aprendizagem $\zeta$ que será aplicado ao treinamento dos classificadores. Na maioria dos casos, é inviável que o método `\textit{wrappers}` explore todas as possibilidades do conjunto de treinamento. Sendo assim, métodos `\textit{wrappers}` geralmente adotam uma busca heurística possivelmente subótima \cite{Klautau2003}. Métodos `\textit{filters}` avaliam o valor do atributo $x_i$ usando heurísticas como, por exemplo, a correlação de $x_i$ com a classe $y$. Dessa forma, métodos `\textit{filters}` demandam menor custo computacional do que os métodos `\textit{wrappers}` e são independentes de $\zeta$. Os métodos também podem ser divididos em métodos que avaliam um atributo individual, por exemplo métodos MI, e métodos que avaliam subconjuntos de atributos, como por exemplo métodos CFS \cite{Hall2003}.
 
 Neste artigo, MI e CFS são usados como base para a seleção de atributos. As hipóteses de que MI e CSF propiciam melhores atributos discriminativos são verificadas em \cite{Patricia2007} e \cite{Hall2003}. 
@@ -360,7 +360,7 @@ Uma das formas mais simples de algoritmos de classificação são implementações de
 
 
 \section{Treinamento e Arquitetura dos Classificadores}
-Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}. WEKA consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítimos de classificação listados na Seção \ref{algCluster} são configurados e utilizados no WEKA. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
+Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}, que consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para: dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítimos de classificação listados na Seção \ref{algCluster} são configurados e utilizados. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
 \begin{table}[htb]
   \caption{Configuração dos classificadores}\label{TebelaClassificadores}
   \begin{center}
@@ -374,21 +374,63 @@ Para se implementar uma tarefa de classificação fonética e possibilitar o treina
     \end{tabular}
   \end{center}
 \end{table}
-
 \subsection{Arquitetura de Classificação}
-O sistema proposto de classificação hierárquica, primeiro analisa a qual BGP cada \textit{frame} pertence. Caso o \textit{frame} analisado pertença ao grupo fonético fricativo, um novo classificador é utilizado para a detecção de classes vozeadas ou não-vozeadas. Finalmente, estimado o vozeamento do \textit{frame}, um terceiro classificador é aplicado para identificação do tipo de fonema fricativo. A Fig. TAL ilustra o processo de classificação hieráquica proposto.
+O sistema proposto de classificação hierárquica, primeiro analisa a qual BGP cada \textit{frame} pertence. Caso o \textit{frame} analisado pertença ao grupo fonético fricativo, um novo classificador é utilizado para a detecção de classes vozeadas ou não-vozeadas. Finalmente, de acordo com o vozeamento estimado do \textit{frame}, um terceiro classificador é aplicado para identificação do tipo de fonema fricativo. A Fig. \ref{classificador} ilustra o processo de classificação hieráquica proposto.
 
-FIGURA TAL
+\begin{figure}[h]
+%\center
+\centering
+%\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
+\includegraphics[scale=0.3]{figures/Classificador.eps}%tree.eps}
+\caption{\label{classificador}Processo de classificação hierárquica.}
+\end{figure}
 
-Para cada nível hierárquico de classificação um subconjunto dos atributos de entrada, $\mathbf{x} = (x_1,\ldots,x_L)$, é utilizado. Esses subconjuntos são previamente investigados conforme as mátricas de seleção de atributos descritas na Seção TAL e constituem a etapa de \textit{front-end} dos classificadores.
+Para cada nível hierárquico de classificação um subconjunto dos atributos de entrada, $\mathbf{x} = (x_1,\ldots,x_L)$, é utilizado. Esses subconjuntos são previamente investigados conforme as mátricas de seleção de atributos descritas na Seção \ref{SelAtrib} e constituem a etapa de \textit{front-end} dos classificadores. Para efeitos de comparação, um sistema de classificação direta, dos grupos apresentados na Tabela \ref{TebelaClasse}, foi desenvolvido usando o algorítimo K-NN.
 
 
 \section{Resultados e Análise de Desempenho}\label{resultados}
-Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores listados na Seção TAL. A fig. TAL apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. 
+Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores listados na Seção \ref{algCluster} para cada grupo fonético. A fig. TAL apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. Os diferentes níveis hierárquicos podem ser avaliados isoladamente. Assim, os atributos e classificadores mais eficientes são selecioandos para comporem o \textit{framework} de classificação. 
+
+FIGURA AVALIAÇÃO ATRIBUTOS E CLASSIFICADORES
+
+A Tabela \ref{desempenho} apresenta a quantidade de atributos, bem como o classificador de melhor desempenho de cada nível hierárquico. Na Tabela \ref{desempenho}, também observa-se o desempenho geral do \textit{framework} de classificação proposto em contraste com o sistema padrão de classficação direta. Nesse contexto, as taxas de acerto dos subgrupos fricativos, $P(C_{l4vf})$, são calculados segundo a Equação (\ref{PropClass}).
+
+\begin{equation}\label{PropClass}
+\begin{array}{lcl}
+P(C_{l4vf}) &=& P(C_{lBGP})P(C_{lvoze})P(C_{lfri})\\
+P(C_{lBGP}) &=& P(C_{lBGP} == Fricativo)\\
+P(C_{lvoze}) &=& P(C_{lvoze} == k)\\
+P(C_{lfri}) &=& P(C_{lfri} == p | k)\\
+\forall k &\in& \{1,2\}\\
+\forall p &\in& \{1,2,3,4\}\;
+ % P(C_{l4vf}) & = & P(Cl_{BGP}==C_{l4}).P(Cl_{voze}==k).\\
+ %             &   & .P(Cl_{fri}==p) \\
+ %             &   & \forall k \in \{1,2\}\;e\;p \in \{1,2,3,4\}\;. 
+\end{array}
+\end{equation}
+
+
+\begin{table}[htb]
+  \caption{Seleção de atributos e desempenho dos Classificadores}\label{desempenho}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}\hline
+      Class.& Qtd. atributos &Taxa de Acerto\\\hline\hline
+      BGP & 67 & 100\%\\                       
+      BGP & 67 & 100\%\\
+      BGP & 67 & 100\%\\
+      BGP & 67 & 100\%\\
+      BGP & 67 & 100\%\\\hline                    
+    \end{tabular}
+  \end{center}
+\end{table}
+
+O \textit{framework} de classificação, composto pelos atributos e classificadores descritos na Tabela TAL, é examinado através da comparação de sua matriz de confusão fonética com a matriz obtida pelo sistema padrão de classficação direta. As matrizes são apresentadas na Fig. TAL. Nesse contexto, nota-se uma menor confusão na matriz resultante do \textit{framework} aqui proposto, confirmando, assim, sua eficácia.
+
+FIGURA MATRIZ DE CONFUSÃO
 
 %Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores fonéticos consagrados do estado-da-arte e quase sempre presente em aplicações de mineração de dados. Assim como no treinamento, os resultados de classificação. to perform the benchmark experimenter we use Weka a powerful open-source machine learning workbench.
 \section{Conclusões e Comentários Finais}\label{conclusao}
-Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de Seleção de Parâmetros tem como função mostrar quais os parâmetros mais relevantes em uma tarefa de classificação.
+Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de seleção de atributos tem como função mostrar quais os atributos mais relevantes em uma tarefa de classificação. Tais atributos, podem ser aplicados à uma classificação direta ou em níveis hierárquicos. Neste trabalho, foi aprsesentada a seleção de atributos aplicados à classificação fonética hierárquica. Resultados de simulações confirmaram a eficácia do \textit{framework} de classificação proposto.
 
 \bibliography{cba02}
 \end{document}
