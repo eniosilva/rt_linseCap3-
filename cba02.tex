@@ -96,13 +96,13 @@ A atividade de classificação de padrões é um processo inerente do ser humano. Pa
 
 Na literatura, diversas estratégias de seleção de atributos são propostas. Em \cite{Klautau2003} a seleção de atributos de percepção linear preditiva (\textit{perceptual linear predictive} - PLP) e coeficientes cepstrais da escala mel (\textit{Mel-frequency cepstrum coefficients} - MFCC) tem como base o algoritmo \textit{AdaBoost} e é aplicada à sistemas de reconhecimento automático de fala baseado em classificadores de máquina de vetores de suporte (\textit{support vector machine} - SVM). Em \cite{Alex2010}, classificadores SVM são utilizados para a classificação de subconjuntos fonéticos e recebem como entrada, atributos de \textit{spectral peak locations}, \textit{spectral rolloff}, \textit{spectral centroid}, dentre outros. Em \cite{Hamooni2014}, classificadores baseados em \textit{k-nearest neighbor} (K-NN) são utilizados em uma classificação fonética hierárquica que operam com atributos nos domínios do tempo e frequência, tais como, a distância DTW (\textit{Dynamic Time Warping}) e coeficientes MFCCs.
 
-Nos referidos trabalhos, os sinais considerados como referência são sinais de fala de banda larga, estes possuem geralmente frequência de amostragem superior à 16000 Hz e contêm componentes de frequências superiores à 3400 Hz. Entretanto, essas estratégias apresentam desempenhos severamente degradados quando operam com sinais de banda limitada. Em contraste, os algoritmos discutidos em \cite{Morales2009}, \cite{He2011} e \cite{Lee2012} utilizam como referência, sinais de fala de banda limitada aplicados à rede de telefonia pública (\textit{public switched telephone network} - PSTN). Todavia, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada que não utilizem uma vasta quantidade de atributos. 
+Nos referidos trabalhos, os sinais considerados como referência são sinais de fala de banda larga, estes possuem geralmente frequência de amostragem superior à 16000 Hz e contêm componentes de frequências superiores à 3400 Hz. Por essa razão, tais estratégias apresentam desempenhos severamente degradados quando operam com sinais de banda limitada. Em contraste, os algoritmos discutidos em \cite{Morales2009}, \cite{He2011} e \cite{Lee2012} utilizam como referência, sinais de fala de banda limitada aplicados à rede de telefonia pública (\textit{public switched telephone network} - PSTN). Todavia, apesar da crescente evolução dos algoritmos de classificação fonética, ainda não se dispõe de qualquer procedimento consolidado apresentando desempenho satisfatório para sinais de banda limitada sem a utilização de uma vasta quantidade de atributos. 
 
 Para contornar as dificuldades na classificação em bandas limitadas, em \cite{Chigier91}, \cite{Jax2004} e \cite{EnioSBrT2013} são apresentadas análises de atributos do sinal de fala em diferentes larguras de banda. Nesse contexto, atributos e grupos fonéticos são investigados objetivando o aprimoramento da classificação. Em \cite{Chigier91} e \cite{Jax2004} diversos atributos são propostos durante o processo de classificação. Já em \cite{EnioSBrT2013}, assim como em \cite{Alex2010}, são propostas classificações com ênfase no grupos fonéticos fricativos, os quais são caracterizados por conterem energia espectral concentrada em altas frequências. 
 
 %Nesses artigos, constatam-se desempenhos satisfatórios na classificação desse grupo fonético específico.
 
-A investigação de grupos fonéticos também é discutida em \cite{Patricia2007}, onde um classificador fonético, construído a partir de redes neurais de mútiplas camadas (\textit{multiLayer perceptron} - MLP), é proposto com base na especialização de classificadores em BPG e na seleção de atributos de tempo e frequência. Tais classificadores enfatizam a capacidade de discriminação de quatro diferentes BGP  (vogais, nasais, fricativas e oclusivas) para, posteriormente, discriminar os fonemas pertinentes a cada BGP correspondente. Dessa maneira, são obtidas melhores taxas de desempenho quando comparado com a classificação isolada dos fonemas. Para a redução de dimensionalidade, a medida de informção mútua (\textit{mutual information - MI}) é usada como função objetivo para seleção dos atributos ótimos usados como entrada dos classificadores. Todavia, mesmo com a seleção de atributos ótimos, a estratégia proposta necessita de uma vasta quantidade de atributos para obter um desempenho satisfatório.
+A investigação de grupos fonéticos também é discutida em \cite{Patricia2007}, onde um classificador fonético, construído a partir de redes neurais de mútiplas camadas (\textit{multiLayer perceptron} - MLP), é proposto com base na especialização de classificadores em BPG e na seleção de atributos de tempo e frequência. Tais classificadores enfatizam a capacidade de discriminação de quatro diferentes BGP  (vogais, nasais, fricativas e oclusivas) para, posteriormente, discriminar os fonemas pertinentes a cada BGP correspondente. Dessa maneira, são obtidas melhores taxas de desempenho quando comparado com a classificação isolada dos fonemas. Para a redução de dimensionalidade, a medida de informção mútua (\textit{mutual information - MI}) é usada como função objetivo para seleção dos atributos ótimos usados como entrada dos classificadores. Todavia, mesmo com a seleção de atributos ótimos, tal estratégia necessita de uma vasta quantidade de atributos para obter um desempenho satisfatório.
 
 %Também em \cite{Patricia2007}, a informção mútua (\textit{mutual information - MI}) é usada como função objetivo para seleção dos atributos ótimos usados como entrada dos classificadores. Todavia, mesmo com a seleção de atributos ótimos, a estratégia proposta necessita de uma vasta quantidade de atributos para obter um desempenho satisfatório.
 
@@ -161,7 +161,7 @@ A classificação fonética é utilizada em uma ampla gama de aplicações nos mais va
 
 O conjunto de sons componentes dos sinais de fala podem ser agrupados, de acordo com suas similaridades acústicas, em classes fonéticas. Tais classes representam um conjunto de características temporais e espectrais singulares. Essas singularidades são específicas de cada conjunto de sinais e garantem maior discriminação entre as diferentes classes fonéticas. 
 
-Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para os usuários de PSTNs convencionais. Assim, uma atenção especial é dada para tais classes de fonemas. 
+Em \cite{Pulakka2007} e \cite{Jesus2001}, são descritas as propriedades acústicas dos sinais de fala. De acordo com a avaliação do comportamento de cada classe fonética quanto à distribuição de energia no domínio espectral, nota-se que, para o conjunto de classes fricativas, os componentes mais discriminativos encontram-se nas altas bandas de frequência, i.e., acima de $3400$ Hz e, consequentemente, além da banda de frequência originalmente considerada por sinais de banda limitada, como no caso da rede PSTN. Dessa forma, dentre as demais classes fonéticas (veja \cite{Cristofaro}), a discriminação entre fonemas das classes fricativas torna sua percepção mais difícil para sinais de banda limitada. Assim, uma atenção especial é dada para tais classes de fonemas. 
 
 Portanto, com base em \cite{Patricia2007}, \cite{Alex2010} e \cite{EnioSBrT2013}, neste trabalho de pesquisa, discutimos a classificação do sinal de fala em grupos fonéticos abrangentes (\textit{broad phonetic group - BGP}) com ênfase ao subgrupo fonético fricativo. E, usando o conceito de classificação hierárquica presente em \cite{Hamooni2014} e de classes BGP presente em \cite{Patricia2007}, são propostas classes agrupadas hierárquicamente conforme a ilustração da Fig. \ref{tree}, a qual será utilizada como referência para o processo de classificação fonética dos sinais de fala.
 \begin{figure}[h]
@@ -174,7 +174,7 @@ Portanto, com base em \cite{Patricia2007}, \cite{Alex2010} e \cite{EnioSBrT2013}
 \caption{\label{tree}Árvore fonética.}
 \end{figure}
 
-A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de definição das classes, as classificações fonéticas tornam-se mais discriminativas e, consequentemente, mais apropriada para a etapa de treinamento.
+A Fig. \ref{tree} apresenta diferentes níveis de classificação, detalhes da classificação proposta é apresentada na Tabela \ref{TebelaClasse}. Após o processo de definição das classes, os grupos fonéticos tornam-se mais discriminativos e, consequentemente, mais apropriado para a etapa de treinamento.
 
 \begin{table}[htb]
 \scalefont{0.9}
@@ -232,7 +232,7 @@ Assim como em \cite{GolubThesis2000}, \cite{Jax2004} e \cite{Alex2010}, os segui
       x_{zcr} = \frac{\sum_{k=2}^{N} \frac{1}{2} |Sinal[s(k)]-Sinal[s(k-1)]|}{(N-1)},
    % \end{array}
   \end{equation}
-onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \leq 0$.
+onde $Sinal[s(k)]=1$, quando $s(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $s(k) \leq 0$.
 
  \item O índice de gradiente
   \begin{equation}
@@ -291,7 +291,7 @@ onde $Sinal[s(k)]=1$, quando $x(k) \geq 0$; e $Sinal[s(k)]=-1$, quando $x(k) \le
 
  \item A estimativa de audibilidade (\textit{loundness})
   \begin{equation}
-      l = log_2\left(1+\frac{1}{N}\sum_{t=1}^N|a_t|\right).
+      l = log_2\left(1+\frac{1}{N}\sum_{k=1}^N|s(k)|\right).
   \end{equation}
 
  \item A estimativa da largura de banda
@@ -310,13 +310,13 @@ Dessa forma, a etapa de extração de atributo resulta em vetores $\mathbf{x} = (x
 \subsection{Seleção de Atributos}\label{SelAtrib}
 Os métodos de seleção de atributos podem ser divididos em dois grupos: `\textit{filters}` e `\textit{wrappers}` \cite{bookweka}, \cite{Hall2003}. Este consite no método que seleciona atributos com base no algorítmo de aprendizagem $\zeta$ que será aplicado ao treinamento dos classificadores. Na maioria dos casos, é inviável que o método `\textit{wrappers}` explore todas as possibilidades do conjunto de treinamento. Sendo assim, métodos `\textit{wrappers}` geralmente adotam uma busca heurística possivelmente subótima \cite{Klautau2003}. Métodos `\textit{filters}` avaliam o valor do atributo $x_i$ usando heurísticas como, por exemplo, a correlação de $x_i$ com a classe $y$. Dessa forma, métodos `\textit{filters}` demandam menor custo computacional do que os métodos `\textit{wrappers}` e são independentes de $\zeta$. Os métodos também podem ser divididos em métodos que avaliam um atributo individual, por exemplo métodos MI, e métodos que avaliam subconjuntos de atributos, como por exemplo métodos CFS \cite{Hall2003}.
 
-Neste artigo, MI e CFS são usados como base para a seleção de atributos. As hipóteses de que MI e CSF propiciam melhores atributos discriminativos são verificadas em \cite{Patricia2007} e \cite{Hall2003}. 
+Neste artigo, MI e CFS são investigados e usados como base para a seleção de atributos. As hipóteses de que MI e CSF propiciam melhores atributos discriminativos são verificadas em \cite{Patricia2007} e \cite{Hall2003}. 
 \subsubsection{Informação mútua}
 A informação mútua, também conhecida como ganho de informação (\textit{information gain} - IG), é descrita como segue. A distribuição $p(y)$ das classes fonéticas é estimada através do conjunto de treinamento $\tau$ e a variável aleatória $Y$ associada tem entropia 
 \begin{equation}
 H(Y) = - \sum_{y \in Y}p(y)log_2(p(y))
 \end{equation}
-Assumimos que o conjunto de treinamento é representado por $\tau = \{(\mathbf{x}^1,y^1),\ldots,(\mathbf{x}^N,y^N)\}$, onde $N$ é o número total de \textit{frames} para treinamento e $\mathbf{x} \supset x_i,\, i \in \{1,\ldots,L\}$. Dessa forma, o conjunto de treinamento pode ser dividido de acordo com seus valores e distribuições, $p(x_i)$ e $p(y|x_i)$, estimadas através da frequência de ocorrência em $\tau$. A entropia de $Y$ condicionada à observação da variável aleatória $X_i$ é expressa por
+Assumimos que o conjunto de treinamento é representado por $\tau = \{(\mathbf{x}^1,y^1),\ldots,(\mathbf{x}^T,y^T)\}$, onde $T$ é o número total de \textit{frames} para treinamento e $\mathbf{x} \supset x_i,\, i \in \{1,\ldots,L\}$. Dessa forma, o conjunto de treinamento pode ser dividido de acordo com seus valores e distribuições, $p(x_i)$ e $p(y|x_i)$, estimadas através da frequência de ocorrência em $\tau$. A entropia de $Y$ condicionada à observação da variável aleatória $X_i$ é expressa por
 \begin{equation}
 H(Y|X_i) = - \sum_{x_i \in X}p(x_i)\sum_{y \in Y}p(y|x_i)log_2(p(y|x_i))
 \end{equation}
@@ -324,13 +324,13 @@ e a informação mútua $I(X_i;Y)$ é computada como
 \begin{equation}
 I(X_i;Y) = H(Y) - H(Y|X_i).
 \end{equation}
-O método consite em calcular $I(X_i;Y) \; \forall \; i = 1,\ldots,L$, e então selecionar os $S$ atributos com maiores valores de $I(X_i;Y)$.
+O método consite em calcular $I(X_i;Y) \; \forall \; i = 1,\ldots,L$, e então selecionar os $A$ atributos com maiores valores de $I(X_i;Y)$.
 \subsubsection{Selelção de parâmetros baseada em correlação}
 A selelção de parâmetros baseada em correlação(\textit{correlation-based feature selection} - CFS) é um método que avalia um subconjunto de atributos. O ponto chave deste método é a avaliação heurística de subconjuntos, examinando a utilidade de um atributo individual durante a predição da classe, juntamente com o nível de intercorrelação entre os mesmos. Em (\ref{heuristic}) é apresentada a heurística que atribui valores mais altos aos subconjuntos que contém atributos altamente correlacionados com a classe e apresentam baixa intercorrelação uns com os outros.
 \begin{equation}\label{heuristic}
 Merit_s=\frac{k_{\bar{r_{cf}}}} {\sqrt{k+k(k-1)\bar{r_{ff}}}},
 \end{equation}
-onde $Merit_s$ é o `mérito` heurístico do subconjunto de atributo $S$ conter $k$ atributos, $\bar{r_{cf}}$ a correlação média atributo-classe, e $\bar{r_{ff}}$ a intercorrelação média atributo-atributo. Para a aplicação da Equação (\ref{heuristic}) é necessário o cálculo da correlação (dependência) entre atributos. Para tal, em CFS, é utilizada a medida de incerteza simétrica para estimar o grau de associação entre os atributos ($X_i$ e $X_j$) \cite{bookweka}:
+onde $Merit_s$ é o `mérito` heurístico do subconjunto de atributo $A$ conter $k$ atributos, $\bar{r_{cf}}$ a correlação média atributo-classe, e $\bar{r_{ff}}$ a intercorrelação média atributo-atributo. Para a aplicação da Equação (\ref{heuristic}) é necessário o cálculo da correlação (dependência) entre atributos. Para tal, em CFS, é utilizada a medida de incerteza simétrica para estimar o grau de associação entre os atributos ($X_i$ e $X_j$) \cite{bookweka}:
 \begin{equation}
 SU=2\times [\frac{H(X_i)+H(X_j)-H(X_i,X_j)}{H(X_i)+H(X_j)}].
 \end{equation}
@@ -361,7 +361,15 @@ Uma das formas mais simples de algoritmos de classificação são implementações de
 
 
 \section{Treinamento e Arquitetura dos Classificadores}\label{treinamento}
-Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento do classificador, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizados em \cite{GrupoFalaBrasil} e \cite{YnogutiSBrT2008}. E para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}, que consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para: dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítmos de classificação listados na Seção \ref{algCluster} são configurados e utilizados. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
+\begin{figure*}
+  \centering
+  %\includegraphics{figuras/Fig_1.eps}
+  \includegraphics[scale=0.5]{figures/evolucao.eps}%tree.eps}
+%   \includegraphics[scale=1]{figuras/Fig_1.eps}
+  \centering
+  \caption{\label{evolucao}Processo de classificação hierárquica.}
+\end{figure*}
+Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento dos classificadores, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizado em \cite{YnogutiSBrT2008}. Visando a simulação de limitação em banda, os sinais de fala foram aplicados à filtragem passa-baixas realizada através do filtro \textit{Chebshev} inverso, com banda passante de 0 a 3400 Hz e atenuação de 40 dB na banda de rejeição. Dessa forma, 2 horas de áudio, de 20 locutores masculinos e 20 locutores femininos, foram utilizados na etapa de treinamento. Para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}, que consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para: dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítmos de classificação listados na Seção \ref{algCluster} são configurados e utilizados. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
 \begin{table}[htb]
   \caption{Configuração dos classificadores}\label{TebelaClassificadores}
   \begin{center}
@@ -391,15 +399,9 @@ Para cada nível hierárquico de classificação um subconjunto dos atributos de ent
 
 
 \section{Resultados e Análise de Desempenho}\label{resultados}
-Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores, listados na Seção \ref{algCluster}, para cada grupo fonético. A Fig. \ref{evolucao} apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. Os diferentes níveis hierárquicos podem ser avaliados isoladamente. Assim, os atributos e classificadores mais eficientes são selecioandos para comporem o \textit{framework} de classificação. 
+Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores, listados na Seção \ref{algCluster}, para cada grupo fonético. Os testes realizados avaliaram os desempenhos dos classificadores para 41 minutos de sinais de fala de 5 locutores masculinos e 5 locutores femininos. A Fig. \ref{evolucao} apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. Os diferentes níveis hierárquicos podem ser avaliados isoladamente. Assim, os atributos e classificadores mais eficientes são selecioandos para comporem o \textit{framework} de classificação. 
 
-\begin{figure}[h]
-%\center
-\centering
-%\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
-\includegraphics[scale=0.25]{figures/evolucao.eps}%tree.eps}
-\caption{\label{evolucao}Processo de classificação hierárquica.}
-\end{figure}
+%Aqui Figura
 
 A Tabela \ref{desempenho} apresenta a quantidade de atributos, bem como o classificador de melhor desempenho de cada nível hierárquico. Na Tabela \ref{desempenho}, também observa-se o desempenho geral do \textit{framework} de classificação proposto em contraste com o sistema padrão de classficação direta. Nesse contexto, as taxas de acerto dos subgrupos fricativos, $P(C_{l4vf})$, são calculados segundo a Equação (\ref{PropClass}).
 
@@ -440,13 +442,13 @@ O \textit{framework} de classificação, composto pelos atributos e classificadore
 \centering
 %\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
 \includegraphics[scale=0.25]{figures/evolucao.eps}%tree.eps}
-\caption{\label{matrix}Processo de classificação hierárquica.}
+\caption{\label{matrix}Matrizes de confusão: (a) \textit{framework} proposto; (b) sistema padrão.}
 \end{figure}
 
 
 %Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores fonéticos consagrados do estado-da-arte e quase sempre presente em aplicações de mineração de dados. Assim como no treinamento, os resultados de classificação. to perform the benchmark experimenter we use Weka a powerful open-source machine learning workbench.
 \section{Conclusões e Comentários Finais}\label{conclusao}
-Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de seleção de atributos tem como função mostrar quais os atributos mais relevantes em uma tarefa de classificação. Tais atributos, podem ser aplicados à uma classificação direta ou em níveis hierárquicos. Neste trabalho, foi aprsesentada a seleção de atributos aplicados à classificação fonética hierárquica. Resultados de simulações confirmaram a eficácia do \textit{framework} de classificação proposto.
+Existe uma tendência de que quanto maior a quantidade de parâmetros utilizados no sistema, melhor será a taxa de acertos na classificação. A contrapartida para esta tendência é o maior custo computacional envolvido e a alta probabilidade do processamento de atributos redundantes. Por essa razão, a técnica de seleção de atributos tem como função mostrar quais os atributos mais relevantes em uma tarefa de classificação. Tais atributos, podem ser aplicados à uma classificação direta ou em níveis hierárquicos. Neste trabalho, foi aprsesentada a seleção de atributos aplicados à classificação fonética hierárquica de sinais de fala de banda limitada. Resultados de simulações permitem inferir a cerca da seleção de atributos ótimos e confirmaram a eficácia do \textit{framework} de classificação proposto.
 
 \bibliography{cba02}
 \end{document}
