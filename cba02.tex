@@ -364,12 +364,13 @@ Uma das formas mais simples de algoritmos de classificação são implementações de
 \begin{figure*}
   \centering
   %\includegraphics{figuras/Fig_1.eps}
-  \includegraphics[scale=0.5]{figures/evolucao.eps}%tree.eps}
+  \includegraphics[scale=0.6]{figures/classificacao.eps}%tree.eps}
+  %\includegraphics[width=12cm]{figures/classificacaoTemp.eps}%tree.eps}
 %   \includegraphics[scale=1]{figuras/Fig_1.eps}
   \centering
   \caption{\label{evolucao}Processo de classificação hierárquica.}
 \end{figure*}
-Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento dos classificadores, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizado em \cite{YnogutiSBrT2008}. Visando a simulação de limitação em banda, os sinais de fala foram aplicados à filtragem passa-baixas realizada através do filtro \textit{Chebshev} inverso, com banda passante de 0 a 3400 Hz e atenuação de 40 dB na banda de rejeição. Dessa forma, 2 horas de áudio, de 20 locutores masculinos e 20 locutores femininos, foram utilizados na etapa de treinamento. Para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}, que consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para: dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítmos de classificação listados na Seção \ref{algCluster} são configurados e utilizados. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
+Para se implementar uma tarefa de classificação fonética e possibilitar o treinamento dos classificadores, torna-se necessária uma base de dados acústica onde cada sinal de referência é caracterizado por uma série de atributos que descrevem suas características fonéticas. Para atender tais requisitos, utilizou-se aqui o \textit{corpora} de fala disponibilizado em \cite{YnogutiSBrT2008}. Visando a simulação de limitação em banda, os sinais de fala foram aplicados à filtragem passa-baixas realizada através do filtro \textit{Chebyshev} inverso, de $15^o$ ordem, com banda passante de 0 a 3400 Hz e atenuação de 90 dB na banda de rejeição. Dessa forma, 2 horas de áudio, de 13 locutores masculinos e 10 locutores femininos, foram utilizados na etapa de treinamento. Para o treinamento dos classificadores, foi utilizada a plataforma de código-livre WEKA (\textit{Waikato Environment for Knowledge Analysis}) \cite{bookweka}, que consiste em uma ferramenta de aprendizagem de máquina e mineração de dados bastante utilizada no estado-da-arte. Contém um coleção de ferramentas de visualização e algoritmos disponíveis para: dados, análise, pré-processamento, classificação, modelagem e avaliação. Dessa forma, os algorítmos de classificação listados na Seção \ref{algCluster} são configurados e utilizados. Detalhes das configurações são descritos na Tabela \ref{TebelaClassificadores}
 \begin{table}[htb]
   \caption{Configuração dos classificadores}\label{TebelaClassificadores}
   \begin{center}
@@ -399,7 +400,7 @@ Para cada nível hierárquico de classificação um subconjunto dos atributos de ent
 
 
 \section{Resultados e Análise de Desempenho}\label{resultados}
-Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores, listados na Seção \ref{algCluster}, para cada grupo fonético. Os testes realizados avaliaram os desempenhos dos classificadores para 41 minutos de sinais de fala de 5 locutores masculinos e 5 locutores femininos. A Fig. \ref{evolucao} apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. Os diferentes níveis hierárquicos podem ser avaliados isoladamente. Assim, os atributos e classificadores mais eficientes são selecioandos para comporem o \textit{framework} de classificação. 
+Objetivando a comparação da eficácia da seleção de atributos para os diferentes níveis hierárquicos, os conjuntos de atributos selecionados pelas técnicas MI e CSF foram testados nos classificadores, listados na Seção \ref{algCluster}, para cada grupo fonético. Os testes realizados avaliaram os desempenhos dos classificadores para 47 minutos de sinais de fala de 6 locutores masculinos e 3 locutores femininos. A Fig. \ref{evolucao} apresenta a evolução da precisão de classificação em relação ao número de atributos selecionados. Os diferentes níveis hierárquicos podem ser avaliados isoladamente. Assim, os atributos e classificadores mais eficientes são selecioandos para comporem o \textit{framework} de classificação. 
 
 %Aqui Figura
 
@@ -424,12 +425,12 @@ P(C_{lfri}) &=& P(C_{lfri} == p | k)\\
   \caption{Seleção de atributos e desempenho dos Classificadores}\label{desempenho}
   \begin{center}
     \begin{tabular}{|c|c|c|c|}\hline
-      Class.& Algor. &Atrib. &Tx. Ac.\\\hline\hline
-      BGP & &67 & 100\%\\                       
-      Vozeamento & &67 & 100\%\\
-      Artic. voze. & &67 & 100\%\\
-      Artic. não-voze.& &67 & 100\%\\\hline
-      \textit{Frmwork} proposto & &67 & 100\%\\
+      Class.& Algor. | Sel. &Atrib. &Tx. Ac.\\\hline\hline
+      BGP & K-NN | CFS & 53 & 100\%\\                       
+      Vozeamento &K-NN | CFS  &67 & 100\%\\
+      Artic. voze. & K-NN | CFS &67 & 100\%\\
+      Artic. não-voze.& K-NN | CFS &67 & 100\%\\\hline
+      \textit{Frmwork} proposto & K-NN | CFS &67 & 100\%\\
       Sistema padrão & K-NN &71 & 100\%\\\hline                    
     \end{tabular}
   \end{center}
@@ -441,7 +442,7 @@ O \textit{framework} de classificação, composto pelos atributos e classificadore
 %\center
 \centering
 %\includegraphics[keepaspectratio,width=8cm]{figuras/Fig_2.eps}
-\includegraphics[scale=0.25]{figures/evolucao.eps}%tree.eps}
+\includegraphics[scale=0.4]{figures/classificacao.eps}%evolucao.eps}
 \caption{\label{matrix}Matrizes de confusão: (a) \textit{framework} proposto; (b) sistema padrão.}
 \end{figure}
 
