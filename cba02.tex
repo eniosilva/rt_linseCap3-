@@ -335,7 +335,7 @@ I(X_i;Y) = H(Y) - H(Y|X_i).
 \end{equation}
 O método consite em calcular $I(X_i;Y) \; \forall \; i = 1,\ldots,L$, e então selecionar os $A$ atributos com maiores valores de $I(X_i;Y)$.
 \subsubsection{Seleção de parâmetros baseada em correlação}
-A seleção de parâmetros baseada em correlação(\textit{correlation-based feature selection} - CFS) é um método que avalia um subconjunto de atributos. O ponto chave deste método é a avaliação heurística de subconjuntos, examinando a utilidade de um atributo individual durante a predição da classe, juntamente com o nível de intercorrelação entre os mesmos. Em (\ref{heuristic}) é apresentada a heurística que atribui valores mais altos aos subconjuntos que contém atributos altamente correlacionados com a classe e apresentam baixa intercorrelação uns com os outros.
+A seleção de parâmetros baseada em correlação (\textit{correlation-based feature selection} - CFS) é um método que avalia um subconjunto de atributos. O ponto chave deste método é a avaliação heurística de subconjuntos, examinando a utilidade de um atributo individual durante a predição da classe, juntamente com o nível de intercorrelação entre os mesmos. Em (\ref{heuristic}) é apresentada a heurística que atribui valores mais altos aos subconjuntos que contém atributos altamente correlacionados com a classe e apresentam baixa intercorrelação uns com os outros.
 \begin{equation}\label{heuristic}
 Merit_s=\frac{k_{\bar{r_{cf}}}} {\sqrt{k+k(k-1)\bar{r_{ff}}}},
 \end{equation}
@@ -419,7 +419,7 @@ Com o intuito de analisar a eficácia da seleção de atributos para os diferentes 
 A Fig. \ref{evolucao} apresenta a evolução do erro de classificação, dos algorítmos K-NNs, em relação ao número de atributos selecionados, bem como a matriz de confusão para cada nível de classificação. Assim, os diferentes níveis hierárquicos podem ser avaliados isoladamente. Dessa forma, os atributos mais relevantes são selecioandos para comporem o \textit{front-end} de cada classificador. 
 
 %Aqui Figura
-A Tabela \ref{desempenho} apresenta o desempenho dos classificadores e destaca os mais eficientes, estes compoem o \textit{framework} de classificação.  Além dos classificadores de melhores desempenhos, também são apresentadas, na Tabela \ref{desempenho}, as quantidades de atributos de cada nível hierárquico. No final da Tabela \ref{desempenho}, observa-se o desempenho geral do \textit{framework} de classificação proposto em contraste com o sistema padrão de classficação direta. Nesse contexto, as taxas de erro de classificação dos subgrupos fricativos, $E_{rro}(C_{l4vf})$, são calculados segundo a Equação (\ref{PropClass}).
+A Tabela \ref{desempenho} apresenta o desempenho dos classificadores e destaca os mais eficientes, estes compõem o \textit{framework} de classificação.  Além dos classificadores de melhores desempenhos, também são apresentadas, na Tabela \ref{desempenho}, as quantidades de atributos de cada nível hierárquico. No final da Tabela \ref{desempenho}, observa-se o desempenho geral do \textit{framework} de classificação proposto em contraste com o sistema padrão de classficação direta. Nesse contexto, as taxas de erro de classificação dos subgrupos fricativos, $E_{rro}(C_{l4vf})$, são calculados segundo a Equação (\ref{PropClass}).
 \vspace{-0.15cm}
 \begin{equation}\label{PropClass}
 \begin{array}{lcl}
